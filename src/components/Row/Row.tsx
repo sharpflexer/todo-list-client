@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { DeleteIcon } from './DeleteIcon';
 import { EditIcon } from './EditIcon';
 import { FolderIcon } from './FolderIcon';
 import classes from './Row.module.css';
 
 interface RowProps {
+  id: number,
   name: string;
   description: string;
+  onClickEdit: () => void
+  onClickDelete: () => {}
 }
 
 function Row(props: RowProps) {
@@ -18,10 +22,10 @@ function Row(props: RowProps) {
           </div>
           <div className={classes.categoryName}></div>
           <div className={classes.edit}>
-            <EditIcon className={classes.icon} />
+            <EditIcon className={classes.icon} onClick={props.onClickEdit}/>
           </div>
           <div className={classes.delete}>
-            <DeleteIcon className={classes.icon} />
+            <DeleteIcon className={classes.icon} onClick={props.onClickDelete}/>
           </div>
         </div>
         <div className={classes.description}>{props.description}</div>

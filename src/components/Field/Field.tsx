@@ -7,10 +7,15 @@ interface IFieldProps {
     hint: string;
     value: string | undefined
     children?: ReactNode
-    handleChange: () => {}
+    setValue: (value: string) => void;
 }
 
-const Field: React.FC<IFieldProps> = ({ className, title, hint, value, children, handleChange}) => {
+
+const Field: React.FC<IFieldProps> = ({ className, title, hint, value, children, setValue}) => {
+    function handleNameChange(event: { target: { value: string; }; }) {
+        setValue(event.target.value);
+    };
+      
     return (
         <div className={className}>
             <div className={classes.text}></div>
@@ -18,7 +23,7 @@ const Field: React.FC<IFieldProps> = ({ className, title, hint, value, children,
                 {title}
                 {children}
             </div>
-            <input className={classes.input} placeholder={hint} onChange={handleChange}/>
+            <input className={classes.input} placeholder={hint} value={value} onChange={handleNameChange}/>
         </div>
     );
 }

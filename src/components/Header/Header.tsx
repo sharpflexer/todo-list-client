@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import './Header.css';
-import Modal from "../Modal/Modal";
-import ModalCreate from "../ModalCreate/ModalCreate";
+import Modal from "../Modals/Modal/Modal";
+import ModalDeleteTask from "../Modals/Tasks/ModalDeleteTask/ModalDeleteTask";
+import ModalDeleteCategory from "../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory";
+import ModalCreateTask from "../Modals/Tasks/ModalCreateTask/ModalCreateTask";
 
 
 function Header() {
@@ -17,7 +19,7 @@ function Header() {
                     <td><h4 className="categories">Категории</h4></td>
                     <td><h5 onClick={() => setModalActive(true)}>Добавить задачу</h5></td>
                     <Modal active={modalActive} setActive={setModalActive}>
-                        <ModalCreate />
+                        <ModalCreateTask />
                     </Modal>
                 </tr>
             </tbody>

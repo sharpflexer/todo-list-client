@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import "./Modal.css";
 import ReactDOM from 'react-dom';
@@ -14,7 +14,7 @@ const Modal: React.FC<IModalProps> = ({ active, setActive, children}) => {
 
     const modalContent = active ? (
         <div className='modal' onClick={() => setActive?.(false)}>
-            <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal__content" onClick={(e) => e.stopPropagation()}>            
                 {children}
             </div>
         </div>
