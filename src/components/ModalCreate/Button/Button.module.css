@@ -1,0 +1,36 @@
+.root {
+    position: absolute;
+    left: 3.6458%;
+    right: 83.8542%;
+    top: 73.4259%;
+    bottom: 22.3148%;
+    width: 240px;
+    height: 46px;
+    align-items: flex-start;
+  }
+  .button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    outline: solid 2px #3f72af;
+    outline-offset: -2px;
+    border-radius: 4px;
+  }
+  .text {
+    font-size: 20px;
+    line-height: 46px;
+    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    position: absolute;
+    left: 3.3333%;
+    right: 3.3333%;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  

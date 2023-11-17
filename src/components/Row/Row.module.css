@@ -1,0 +1,64 @@
+  .background {
+    width: 50svw;
+    height: 10svh;
+  }
+
+  .underline {
+    height: 0.5svh;
+    margin-top: 0.5svh;
+    background-color: #3f72af;
+  }
+
+  .name {
+    display: inline;
+    color: #000;
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 500;
+    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .description {
+    color: #808080;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .edit {
+    display: inline;
+    margin-left: 36svw;
+  }
+
+  .delete {
+    display: inline;
+    margin-left: 0.5svw;
+  }
+
+  .category {
+    margin-left: 0.5svw;
+    display: inline;
+  }
+
+  .icon {
+    width: 1.5svw;
+  }
+
+  .categoryName {
+    margin-left: 0.5svw;
+    display: inline;
+    color: #3f72af;
+    font-size: 18px;
+    line-height: 24px;
+    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+      'Liberation Sans', sans-serif;
+
+    justify-content: center;
+    flex-direction: column;
+  }
