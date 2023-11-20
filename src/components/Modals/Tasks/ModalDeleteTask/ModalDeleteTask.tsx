@@ -3,22 +3,23 @@ import { Close1Icon } from "../../Close1Icon";
 import { DropDownArrow1Icon } from "../../DropDownArrow1Icon";
 import Field from "../../../Field/Field";
 import Button from "../../../Button/Button";
+import { Task } from "../../../TaskList/TaskList";
 
 interface IModalDeleteProps{
-    id: number;
-    name: string;
+    task: Task;
+    deletePage: (id: number) => void
 }
 
-const ModalDeleteTask: React.FC<IModalDeleteProps> = ({id, name}) => {   
+const ModalDeleteTask: React.FC<IModalDeleteProps> = ({task, deletePage}) => {   
     function deleteClick() {
-        deleteTask(id)
+       deletePage(task.id);
     }
 
     return (
         <div>
             <div className="modalContent"></div>
             <div className="title">Удаление задачи</div>
-            <label className="deleteMessage">Вы уверены, что хотите удалить задачу {name}?</label>
+            <label className="deleteMessage">Вы уверены, что хотите удалить задачу {task.name}?</label>
             <Button className="submit"
                     text="Да" 
                     onAction={deleteClick} />
@@ -32,19 +33,6 @@ const ModalDeleteTask: React.FC<IModalDeleteProps> = ({id, name}) => {
             </div>
         </div>
     );
-}
-
-function deleteTask(id: number) {
-    fetch('http://192.168.100.206:8089/api/ToDoList/DeleteTask', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: {id}
-        })
-    });
 }
 
 

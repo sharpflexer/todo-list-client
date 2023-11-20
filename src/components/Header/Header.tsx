@@ -7,7 +7,7 @@ import ModalCreateTask from "../Modals/Tasks/ModalCreateTask/ModalCreateTask";
 
 
 function Header() {
-    const [modalActive, setModalActive] = useState<boolean>(true);
+    const [modalActive, setModalActive] = useState<boolean>(false);
 
     return (
         <table className="layout">

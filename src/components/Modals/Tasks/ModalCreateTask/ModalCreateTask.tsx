@@ -54,8 +54,7 @@ function ModalCreateTask() {
 }
 
 function createTask(name:string, description:string, category:string) {
-    let categoryNum = Number(category);
-    fetch('http://192.168.100.206:8089/api/ToDoList/AddTask', {
+    fetch('http://192.168.120.246:8089/api/ToDoList/AddTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -64,7 +63,7 @@ function createTask(name:string, description:string, category:string) {
         body: JSON.stringify({
             name: name,
             description: description,
-            categoryId: categoryNum
+            categoryId: category
         })
     });
 }

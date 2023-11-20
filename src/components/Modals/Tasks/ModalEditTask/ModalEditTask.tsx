@@ -7,15 +7,21 @@ import { Task } from "../../../TaskList/TaskList";
 
 interface IModalEditProps{
     task:Task
+    updatePage: (task: Task) => void
 }
 
-const ModalEditTask: React.FC<IModalEditProps> = ({ task}) => {
-    const [name, setName] = useState<string>('');
-    const [category, setCategory] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
+const ModalEditTask: React.FC<IModalEditProps> = ({task, updatePage}) => {
+    const [name, setName] = useState<string>(task.name);
+    const [categoryId, setCategoryId] = useState<string>(task.categoryId + '');
+    const [description, setDescription] = useState<string>(task.description);
     
     function updateClick() {
-        //updateTask(id, name, description, category)
+        updatePage({
+            id: task.id, 
+            name: name, 
+            description: description, 
+            categoryId: Number(categoryId)
+        });
     }
 
     return (
@@ -25,7 +31,7 @@ const ModalEditTask: React.FC<IModalEditProps> = ({ task}) => {
 
             <Field className="name"
                    title="Имя" 
-                   hint="Введите название задачи" 
+                   hint=""
                    value={name} 
                    setValue={setName}>
                 <div className="redStar">*</div>
@@ -33,13 +39,13 @@ const ModalEditTask: React.FC<IModalEditProps> = ({ task}) => {
 
             <Field className="category"
                    title="Категория" 
-                   hint="Выберите категорию" 
-                   value={category} 
-                   setValue={setCategory}/>
+                   hint=""
+                   value={categoryId} 
+                   setValue={setCategoryId}/>
 
             <Field className="description"
                    title="Описание" 
-                   hint="Введите описание задачи" 
+                   hint=""
                    value={description} 
                    setValue={setDescription}/>
                    
@@ -56,22 +62,6 @@ const ModalEditTask: React.FC<IModalEditProps> = ({ task}) => {
             </div>
         </div>
     );
-}
-
-function updateTask(id: number, name:string, description:string, category:string) {
-    fetch('http://192.168.100.206:8089/api/ToDoList/UpdateTask', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: {id},
-            name: {name},
-            description: {description},
-            categoryId: {category}
-        })
-    });
 }
 
 

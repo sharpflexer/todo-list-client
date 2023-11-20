@@ -48,6 +48,7 @@
 
   .icon {
     width: 1.5svw;
+    cursor: pointer;
   }
 
   .categoryName {

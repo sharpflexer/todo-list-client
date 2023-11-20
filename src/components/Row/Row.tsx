@@ -8,11 +8,20 @@ interface RowProps {
   id: number,
   name: string;
   description: string;
-  onClickEdit: () => void
-  onClickDelete: () => {}
+  onClickEdit: (id: number) => void
+  onClickDelete: (id: number) => void
 }
 
 function Row(props: RowProps) {
+
+  function clickEdit(){
+    return props.onClickEdit(props.id);
+  }
+
+  function clickDelete(){
+    return props.onClickDelete(props.id);
+  }
+
   return (
       <td className={classes.background}>
         <div>
@@ -22,10 +31,10 @@ function Row(props: RowProps) {
           </div>
           <div className={classes.categoryName}></div>
           <div className={classes.edit}>
-            <EditIcon className={classes.icon} onClick={props.onClickEdit}/>
+            <EditIcon className={classes.icon} onClick={clickEdit}/>
           </div>
           <div className={classes.delete}>
-            <DeleteIcon className={classes.icon} onClick={props.onClickDelete}/>
+            <DeleteIcon className={classes.icon} onClick={clickDelete}/>
           </div>
         </div>
         <div className={classes.description}>{props.description}</div>
