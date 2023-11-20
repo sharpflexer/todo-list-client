@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import { DeleteIcon } from './DeleteIcon';
-import { EditIcon } from './EditIcon';
-import { FolderIcon } from './FolderIcon';
 import classes from './Row.module.css';
 
 interface RowProps {
@@ -27,14 +24,14 @@ function Row(props: RowProps) {
         <div>
           <div className={classes.name}>{props.name}</div>
           <div className={classes.category}>
-            <FolderIcon className={classes.icon} />
+            <img className={classes.icon} src="svg/folder.svg" alt=""></img>
           </div>
           <div className={classes.categoryName}></div>
           <div className={classes.edit}>
-            <EditIcon className={classes.icon} onClick={clickEdit}/>
+            <img className={classes.icon} src="svg/edit.svg" alt="" onClick={clickEdit}></img>
           </div>
           <div className={classes.delete}>
-            <DeleteIcon className={classes.icon} onClick={clickDelete}/>
+            <img className={classes.icon} src="svg/delete.svg" alt="" onClick={clickDelete}></img>
           </div>
         </div>
         <div className={classes.description}>{props.description}</div>

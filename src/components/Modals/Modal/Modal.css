@@ -77,14 +77,15 @@
     box-shadow: 0px 8px 24px 0px #00000080;
   }
   
-  .closeCross {
+  .close {
     position: absolute;
-    left: 68.3333%;
+    left: 66.5333%;
     right: 30.4167%;
     top: 34.8148%;
     bottom: 62.963%;
     width: 24px;
     height: 24px;
+    cursor:pointer;
   }
   
   .icon {

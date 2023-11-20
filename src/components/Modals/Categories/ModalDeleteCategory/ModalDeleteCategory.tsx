@@ -1,15 +1,13 @@
 import { useRef, useState } from "react";
-import { Close1Icon } from "../../Close1Icon";
-import { DropDownArrow1Icon } from "../../DropDownArrow1Icon";
 import Field from "../../../Field/Field";
 import Button from "../../../Button/Button";
 
-interface IModalDeleteProps{
+interface IModalDeleteProps {
     id: number;
     name: string;
 }
 
-const ModalDeleteCategory: React.FC<IModalDeleteProps> = ({id, name}) => {   
+const ModalDeleteCategory: React.FC<IModalDeleteProps> = ({ id, name }) => {
     function deleteClick() {
         deleteCategory(id)
     }
@@ -20,16 +18,14 @@ const ModalDeleteCategory: React.FC<IModalDeleteProps> = ({id, name}) => {
             <div className="title">Удаление категории</div>
             <label className="deleteMessage">Вы уверены, что хотите удалить категорию "{name}"?</label>
             <Button className="submit"
-                    text="Да" 
-                    onAction={deleteClick} />
+                text="Да"
+                onAction={deleteClick} />
 
             <Button className="cancel"
-                    text="Нет" 
-                    onAction={() => { }} />
+                text="Нет"
+                onAction={() => { }} />
 
-            <div className="close">
-                <Close1Icon className="icon" />
-            </div>
+            <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
         </div>
     );
 }
@@ -42,7 +38,7 @@ function deleteCategory(id: number) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: {id}
+            id: { id }
         })
     });
 }
