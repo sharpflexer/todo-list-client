@@ -2,21 +2,34 @@ import { useRef, useState } from "react";
 import Button from "../../../Button/Button";
 import Field from "../../../Field/Field";
 
-function ModalCreateTask() {
-    const [name, setName] = useState<string>('');
-    const [category, setCategory] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
+import { IModalProps } from "..//..//Modal/Modal";
 
+import fields from "../../fields.module.css";
+import Modal from "../../Modal/Modal";
+import useFieldsState from "../../../../hooks/useFieldsState";
+
+export interface IFields{
+    name: string;
+    category: string;
+    description: string;
+    setName: (value: string) => void;
+    setCategory: (value:string) => void;
+    setDescription: (value: string) => void;
+}
+
+const ModalCreateTask = ({ active, setActive }: IModalProps) => {
+
+    const {name, category, description ,setName, setCategory, setDescription} = useFieldsState();
+    
     function createClick() {
         createTask(name, description, category)
     }
-
     return (
-        <div>
+        <Modal active={active} setActive={setActive} submitClick={createClick}>
             <div className="modalContent"></div>
             <div className="title">Создание задачи</div>
 
-            <Field className="name"
+            <Field className={fields.name}
                 title="Имя"
                 hint="Введите название задачи"
                 value={name}
@@ -24,33 +37,23 @@ function ModalCreateTask() {
                 <div className="redStar">*</div>
             </Field>
 
-            <Field className="category"
+            <Field className={fields.category}
                 title="Категория"
                 hint="Выберите категорию"
                 value={category}
                 setValue={setCategory} />
 
-            <Field className="description"
+            <Field className={fields.description}
                 title="Описание"
                 hint="Введите описание задачи"
                 value={description}
                 setValue={setDescription} />
-
-            <Button className="submit"
-                text="Создать"
-                onAction={createClick} />
-
-            <Button className="cancel"
-                text="Закрыть"
-                onAction={() => { }} />
-
-            <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
-        </div>
+        </Modal>
     );
 }
 
 function createTask(name: string, description: string, category: string) {
-    fetch('http://192.168.120.246:8089/api/ToDoList/AddTask', {
+    fetch('http://192.168.100.222:8089/api/ToDoList/AddTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -63,7 +66,5 @@ function createTask(name: string, description: string, category: string) {
         })
     });
 }
-
-
 
 export default ModalCreateTask;

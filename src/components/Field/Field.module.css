@@ -1,46 +1,63 @@
+.text {
+  position: absolute;
+  left: 0.9896%;
+  right: 66.4583%;
+  top: 43.8567%;
+  bottom: 54.537%;
+  width: 49px;
+  height: 17.3478px;
 
-  .text {
-    position: absolute;
-    left: 0.9896%;
-    right: 66.4583%;
-    top: 43.8567%;
-    bottom: 54.537%;
-    width: 49px;
-    height: 17.3478px;
+}
 
-  }
+.text2 {
+  color: #3f72af;
+  font-size: 18px;
+  line-height: 20px;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 2%;
+  right: 67.004%;
+  top: -1svh;
+  bottom: 54.537%;
+  height: 19px;
+  width: 7svw;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #dbe2ef;
+}
 
-  .text2 {
-    color: #3f72af;
-    font-size: 18px;
-    line-height: 20px;
-    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-      'Liberation Sans', sans-serif;
-    position: absolute;
-    left: 2%;
-    right: 67.004%;
-    top: -1svh;
-    bottom: 54.537%;
-    height: 19px;
-    width: 7svw;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #dbe2ef;
-  }
-  .input {
-    color: #00000080;
-    font-size: 20px;
-    line-height: 46px;
-    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-      'Liberation Sans', sans-serif;
-    position: absolute;
-    left: 2%;
-    right: 39.1667%;
-    top: 25.6296%;
-    width: 96%;
-    height: 30px;
-    white-space: nowrap;
-    flex-direction: column;
-    border-style: hidden;
-    background-color: #dbe2ef;
-  }
+.input {
+  color: #00000080;
+  font-size: 20px;
+  line-height: 46px;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 2%;
+  right: 39.1667%;
+  top: 25.6296%;
+  width: 96%;
+  height: 30px;
+  white-space: nowrap;
+  flex-direction: column;
+  border-style: hidden;
+  background-color: #dbe2ef;
+}
+
+.redStar {
+  color: #ec1d1d;
+  font-size: 18px;
+  line-height: 20px;
+  font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  position: absolute;
+  left: 15.0208%;
+  right: 66.6667%;
+  top: 2%;
+  bottom: 54.537%;
+  width: 6px;
+  height: 19px;
+  justify-content: center;
+  flex-direction: column;
+}

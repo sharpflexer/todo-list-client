@@ -1,0 +1,40 @@
+.name {
+    position: absolute;
+    left: 30.45%;
+    top: 44.6296%;
+    bottom: 51.1111%;
+    width: 18.2svw;
+    height: 46px;
+    outline: solid 2px #3f72af;
+    outline-offset: -2px;
+    border-radius: 4px;
+    background-color: #dbe2ef;
+}
+
+.category {
+    position: absolute;
+    left: 49.8%;
+    right: 30.4167%;
+    top: 44.6296%;
+    bottom: 51.1111%;
+    width: 18.2svw;
+    height: 46px;
+    outline: solid 2px #3f72af;
+    outline-offset: -2px;
+    border-radius: 4px;
+    background-color: #dbe2ef;
+}
+
+.description {
+    position: absolute;
+    left: 30.4167%;
+    right: 30.4167%;
+    top: 54.037%;
+    bottom: 41.2963%;
+    width: 37.6svw;
+    height: 46px;
+    outline: solid 2px #3f72af;
+    outline-offset: -2px;
+    border-radius: 4px;
+    background-color: #dbe2ef;
+}

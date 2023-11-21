@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import "./Modal.css";
+import classes from "./Modal.module.css";
 import ReactDOM from 'react-dom';
+import Button from '../../Button/Button';
 
-interface IModalProps {
+export interface IModalProps {
     active: boolean;
-    setActive?: (value: boolean) => void;
-    children?: React.ReactNode
+    setActive: (value: boolean) => void;
+    submitClick?: () => void;
+    children?: React.ReactNode;
 }
 
-const Modal: React.FC<IModalProps> = ({ active, setActive, children}) => {
+const Modal: React.FC<IModalProps> = ({ active, setActive, submitClick}) => {
+    function closeModal(){
+        setActive(false);
+    }
+
     const modalContainer = document.getElementById("root");
 
     const modalContent = active ? (
-        <div className='modal' onClick={() => setActive?.(false)}>
-            <div className="modal__content" onClick={(e) => e.stopPropagation()}>            
-                {children}
+        <div className={classes.modal} onClick={() => setActive?.(false)}>
+            <div className={classes.modal__content} onClick={(e) => e.stopPropagation()}>
+
+                <Button className="submit"
+                    text="Создать"
+                    onAction={submitClick ? submitClick : () => {}} />
+
+                <Button className="cancel"
+                    text="Закрыть"
+                    onAction={closeModal} />
+
+                <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
             </div>
         </div>
     ) : null;

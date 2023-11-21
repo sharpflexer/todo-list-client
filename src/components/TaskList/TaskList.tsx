@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Row from '../Row/Row';
-import './TaskList.css';
+import classes from './TaskList.module.css';
 import ModalEdit from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
 import ModalEditTask from '../Modals/Tasks/ModalEditTask/ModalEditTask';
 import Modal from '../Modals/Modal/Modal';
@@ -59,7 +59,7 @@ function TaskList() {
     const dataFetch = async () => {
         const data = await (
             await fetch(
-                'http://192.168.120.246:8089/api/ToDoList/GetTasks',
+                'http://192.168.100.222:8089/api/ToDoList/GetTasks',
             )
         ).json();
 
@@ -80,23 +80,18 @@ function TaskList() {
         </tr>
     ));
     return (
-        <div className='main'>
-            <div className='background'></div>
-            <table className='taskList'>
+        <div className={classes.main}>
+            <table className={classes.tasklist}>
                 <tbody>{listItems}</tbody>
             </table>
-            <Modal active={editModalActive} setActive={setEditModalActive} >
-                <ModalEditTask task={currentData} updatePage={onEditUpdate} />
-            </Modal>
-            <Modal active={deleteModalActive} setActive={setDeleteModalActive} >
-                <ModalDeleteTask task={currentData} deletePage={onDeleteUpdate} />
-            </Modal>
+            <ModalEditTask active={editModalActive} setActive={setEditModalActive} task={currentData} updatePage={onEditUpdate} />
+            <ModalDeleteTask active={deleteModalActive} setActive={setDeleteModalActive} task={currentData} deletePage={onDeleteUpdate} />
         </div>
     );
 }
 
 async function updateTask(task: Task) {
-    await fetch('http://192.168.120.246:8089/api/ToDoList/UpdateTask', {
+    await fetch('http://192.168.100.222:8089/api/ToDoList/UpdateTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -107,7 +102,7 @@ async function updateTask(task: Task) {
 }
 
 async function deleteTask(id: number) {
-    await fetch('http://192.168.120.246:8089/api/ToDoList/RemoveTask/' + id, {
+    await fetch('http://192.168.100.222:8089/api/ToDoList/RemoveTask/' + id, {
         method: 'GET'
     });
 }

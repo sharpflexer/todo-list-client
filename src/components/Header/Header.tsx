@@ -5,10 +5,16 @@ import ModalDeleteTask from "../Modals/Tasks/ModalDeleteTask/ModalDeleteTask";
 import ModalDeleteCategory from "../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory";
 import ModalCreateTask from "../Modals/Tasks/ModalCreateTask/ModalCreateTask";
 
+//Работает
+interface IActive{
+    setModalActive: (value: boolean) => void
+}
 
-function Header() {
-    const [modalActive, setModalActive] = useState<boolean>(false);
-
+function Header({setModalActive} : IActive ) {
+    const [name, setName] = useState<string>('');
+    const [category, setCategory] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    //TODO: Обернуть tasklist в context
     return (
         <table className="layout">
             <tbody>
@@ -18,9 +24,6 @@ function Header() {
                     <td><h4 className="vbar">|</h4></td>
                     <td><h4 className="categories">Категории</h4></td>
                     <td><h5 onClick={() => setModalActive(true)}>Добавить задачу</h5></td>
-                    <Modal active={modalActive} setActive={setModalActive}>
-                        <ModalCreateTask />
-                    </Modal>
                 </tr>
             </tbody>
         </table>

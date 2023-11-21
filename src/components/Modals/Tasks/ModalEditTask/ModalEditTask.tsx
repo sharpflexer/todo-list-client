@@ -2,28 +2,28 @@ import { useRef, useState } from "react";
 import Field from "../../../Field/Field";
 import Button from "../../../Button/Button";
 import { Task } from "../../../TaskList/TaskList";
+import useFieldsState from "../../../../hooks/useFieldsState";
+import Modal, { IModalProps } from "../../Modal/Modal";
 
-interface IModalEditProps {
+interface IModalEditProps extends IModalProps{
     task: Task
     updatePage: (task: Task) => void
 }
 
-const ModalEditTask: React.FC<IModalEditProps> = ({ task, updatePage }) => {
-    const [name, setName] = useState<string>(task.name);
-    const [categoryId, setCategoryId] = useState<string>(task.categoryId + '');
-    const [description, setDescription] = useState<string>(task.description);
+const ModalEditTask = ({ task, updatePage, active, setActive }: IModalEditProps) => {
+    const {name, category, description ,setName, setCategory, setDescription} = useFieldsState();
 
     function updateClick() {
         updatePage({
             id: task.id,
             name: name,
             description: description,
-            categoryId: Number(categoryId)
+            categoryId: Number(category)
         });
     }
 
     return (
-        <div>
+        <Modal active={active} setActive={setActive} submitClick={updateClick}>
             <div className="modalContent"></div>
             <div className="title">Редактирование задачи</div>
 
@@ -38,8 +38,8 @@ const ModalEditTask: React.FC<IModalEditProps> = ({ task, updatePage }) => {
             <Field className="category"
                 title="Категория"
                 hint=""
-                value={categoryId}
-                setValue={setCategoryId} />
+                value={category}
+                setValue={setCategory} />
 
             <Field className="description"
                 title="Описание"
@@ -55,7 +55,7 @@ const ModalEditTask: React.FC<IModalEditProps> = ({ task, updatePage }) => {
                 text="Закрыть"
                 onAction={() => { }} />
             <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
-        </div>
+        </Modal>
     );
 }
 
