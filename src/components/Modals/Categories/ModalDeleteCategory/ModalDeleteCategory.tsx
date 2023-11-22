@@ -1,7 +1,3 @@
-import { useRef, useState } from "react";
-import Field from "../../../Field/Field";
-import Button from "../../../Button/Button";
-
 interface IModalDeleteProps {
     id: number;
     name: string;
@@ -17,14 +13,6 @@ const ModalDeleteCategory: React.FC<IModalDeleteProps> = ({ id, name }) => {
             <div className="modalContent"></div>
             <div className="title">Удаление категории</div>
             <label className="deleteMessage">Вы уверены, что хотите удалить категорию "{name}"?</label>
-            <Button className="submit"
-                text="Да"
-                onAction={deleteClick} />
-
-            <Button className="cancel"
-                text="Нет"
-                onAction={() => { }} />
-
             <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
         </div>
     );

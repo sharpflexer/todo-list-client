@@ -49,7 +49,7 @@ function TaskList() {
 
     const onDeleteUpdate = (id: number) => {
         setDeleteModalActive(false);
-        
+
         deleteTask(id).then(() => {
             const oldTasks = data.filter((d) => d.id !== id);
             setData(oldTasks)
@@ -71,19 +71,17 @@ function TaskList() {
     }, []);
 
     const listItems = data.map(task => (
-        <tr key={task.id}>
-            <Row id={task.id}
-                name={task.name}
-                description={task.description}
-                onClickEdit={onEdit}
-                onClickDelete={onDelete} />
-        </tr>
+        <Row id={task.id}
+            name={task.name}
+            description={task.description}
+            onClickEdit={onEdit}
+            onClickDelete={onDelete} />
     ));
     return (
         <div className={classes.main}>
-            <table className={classes.tasklist}>
-                <tbody>{listItems}</tbody>
-            </table>
+            <div className={classes.tasklist}>
+                {listItems}
+            </div>
             <ModalEditTask active={editModalActive} setActive={setEditModalActive} task={currentData} updatePage={onEditUpdate} />
             <ModalDeleteTask active={deleteModalActive} setActive={setDeleteModalActive} task={currentData} deletePage={onDeleteUpdate} />
         </div>

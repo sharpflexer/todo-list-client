@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import Button from "../../../Button/Button";
 import Field from "../../../Field/Field";
 
 function ModalCreateCategory() {
@@ -28,16 +27,6 @@ function ModalCreateCategory() {
                 hint="Введите описание категории"
                 value={description}
                 setValue={setDescription} />
-
-            <Button className="submit"
-                text="Создать"
-                onAction={createClick} />
-
-            <Button className="cancel"
-                text="Закрыть"
-                onAction={() => { }} />
-
-            <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
         </div>
     );
 }

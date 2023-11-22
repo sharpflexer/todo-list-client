@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import Field from "../../../Field/Field";
-import Button from "../../../Button/Button";
 
 interface IModalEditProps {
     id: number;
@@ -32,16 +31,6 @@ const ModalEdit: React.FC<IModalEditProps> = ({ id }) => {
                 hint="Введите описание категории"
                 value={description}
                 setValue={setDescription} />
-
-            <Button className="submit"
-                text="Сохранить"
-                onAction={updateClick} />
-
-            <Button className="cancel"
-                text="Закрыть"
-                onAction={() => { }} />
-
-            <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
         </div>
     );
 }

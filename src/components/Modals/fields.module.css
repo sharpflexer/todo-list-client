@@ -1,10 +1,13 @@
+.topLayer{
+    height: 50%;
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .name {
-    position: absolute;
-    left: 30.45%;
-    top: 44.6296%;
-    bottom: 51.1111%;
-    width: 18.2svw;
-    height: 46px;
     outline: solid 2px #3f72af;
     outline-offset: -2px;
     border-radius: 4px;
@@ -12,13 +15,6 @@
 }
 
 .category {
-    position: absolute;
-    left: 49.8%;
-    right: 30.4167%;
-    top: 44.6296%;
-    bottom: 51.1111%;
-    width: 18.2svw;
-    height: 46px;
     outline: solid 2px #3f72af;
     outline-offset: -2px;
     border-radius: 4px;
@@ -26,15 +22,20 @@
 }
 
 .description {
-    position: absolute;
-    left: 30.4167%;
-    right: 30.4167%;
-    top: 54.037%;
-    bottom: 41.2963%;
-    width: 37.6svw;
-    height: 46px;
     outline: solid 2px #3f72af;
     outline-offset: -2px;
     border-radius: 4px;
     background-color: #dbe2ef;
 }
+
+/* В ModalDelete */
+.deleteMessage {
+    color: black;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+    width: 500px;
+    height: 24px;
+    align-self: center;
+  }

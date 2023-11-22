@@ -11,32 +11,29 @@ interface RowProps {
 
 function Row(props: RowProps) {
 
-  function clickEdit(){
+  function clickEdit() {
     return props.onClickEdit(props.id);
   }
 
-  function clickDelete(){
+  function clickDelete() {
     return props.onClickDelete(props.id);
   }
 
   return (
-      <td className={classes.background}>
-        <div>
-          <div className={classes.name}>{props.name}</div>
-          <div className={classes.category}>
-            <img className={classes.icon} src="svg/folder.svg" alt=""></img>
-          </div>
-          <div className={classes.categoryName}></div>
-          <div className={classes.edit}>
-            <img className={classes.icon} src="svg/edit.svg" alt="" onClick={clickEdit}></img>
-          </div>
-          <div className={classes.delete}>
-            <img className={classes.icon} src="svg/delete.svg" alt="" onClick={clickDelete}></img>
-          </div>
+    <div className={classes.background}>
+      <div className={classes.header}>
+        <div className={classes.name}>{props.name}</div>
+        <div className={classes.category}></div>
+        <img className={classes.icon} src="svg/folder.svg" alt=""></img>
+        <div className={classes.categoryName}>Категория</div>
+        <div className={classes.actions}>
+          <img className={classes.icon} src="svg/edit.svg" alt="" onClick={clickEdit}></img>
+          <img className={classes.icon} src="svg/delete.svg" alt="" onClick={clickDelete}></img>
         </div>
-        <div className={classes.description}>{props.description}</div>
-        <div className={classes.underline}></div>
-    </td>
+      </div>
+      <div className={classes.description}>{props.description}</div>
+      <div className={classes.underline}></div>
+    </div >
   );
 }
 
