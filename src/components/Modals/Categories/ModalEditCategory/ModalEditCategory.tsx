@@ -1,37 +1,52 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Field from "../../../Field/Field";
+import Modal, { IModalProps } from "../../Modal/Modal";
+import { Category } from "../ModalDeleteCategory/ModalDeleteCategory";
+import fields from "../../fields.module.css";
 
-interface IModalEditProps {
-    id: number;
+interface IEditCategory extends IModalProps {
+    category: Category;
+    editCategory: (id: number) => void
 }
 
-const ModalEdit: React.FC<IModalEditProps> = ({ id }) => {
+const ModalEdit = ({ active, setActive, category, editCategory }: IEditCategory) => {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
+    useEffect(() => {
+        setName(category.name);
+        setDescription(category.description);
+    }, [category, setName, setDescription]);
+
     function updateClick() {
-        updateTask(id, name, description)
+        updateTask(category.id, name, description)
+        setActive(false);
     }
 
     return (
-        <div>
-            <div className="modalContent"></div>
-            <div className="title">Редактирование категории</div>
+        <Modal title="Редактирование категории"
+            submitName="Сохранить"
+            cancelName="Закрыть"
+            active={active}
+            setActive={setActive}
+            submitClick={updateClick}>
+            <div className={fields.topLayer}>
 
-            <Field className="name"
-                title="Имя"
-                hint="Введите название категории"
-                value={name}
-                setValue={setName}>
-                <div className="redStar">*</div>
-            </Field>
-
-            <Field className="description"
+                <Field className={fields.name}
+                    title="Имя"
+                    hint=""
+                    value={name}
+                    setValue={setName}>
+                    <div className="redStar">*</div>
+                </Field>
+                
+            </div>
+            <Field className={fields.description}
                 title="Описание"
-                hint="Введите описание категории"
+                hint=""
                 value={description}
                 setValue={setDescription} />
-        </div>
+        </Modal>
     );
 }
 

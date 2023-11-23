@@ -1,15 +1,24 @@
 import Field from "../../../Field/Field";
+import fields from "../../fields.module.css";
 import { Task } from "../../../TaskList/TaskList";
 import useFieldsState from "../../../../hooks/useFieldsState";
 import Modal, { IModalProps } from "../../Modal/Modal";
+import { useEffect } from "react";
 
-interface IModalEditProps extends IModalProps{
+interface IModalEditProps extends IModalProps {
     task: Task
     updatePage: (task: Task) => void
 }
 
 const ModalEditTask = ({ task, updatePage, active, setActive }: IModalEditProps) => {
-    const {name, category, description ,setName, setCategory, setDescription} = useFieldsState();
+    const { name, category, description, setName, setCategory, setDescription } = useFieldsState();
+
+    useEffect(() => {
+        setName(task.name);
+        setCategory(task.categoryId + '');
+        setDescription(task.description);
+    }, [task, setName, setCategory, setDescription]);
+
 
     function updateClick() {
         updatePage({
@@ -22,25 +31,29 @@ const ModalEditTask = ({ task, updatePage, active, setActive }: IModalEditProps)
     }
 
     return (
-        <Modal active={active} setActive={setActive} submitClick={updateClick}>
-            <div className="modalContent"></div>
-            <div className="title">Редактирование задачи</div>
+        <Modal title="Редактирование задачи"
+            submitName="Сохранить"
+            cancelName="Закрыть"
+            active={active}
+            setActive={setActive}
+            submitClick={updateClick}>
+            <div className={fields.topLayer}>
 
-            <Field className="name"
-                title="Имя"
-                hint=""
-                value={name}
-                setValue={setName}>
-                <div className="redStar">*</div>
-            </Field>
+                <Field className={fields.name}
+                    title="Имя"
+                    hint=""
+                    value={name}
+                    setValue={setName}>
+                    <div className="redStar">*</div>
+                </Field>
 
-            <Field className="category"
-                title="Категория"
-                hint=""
-                value={category}
-                setValue={setCategory} />
-
-            <Field className="description"
+                <Field className={fields.category}
+                    title="Категория"
+                    hint=""
+                    value={category}
+                    setValue={setCategory} />
+            </div>
+            <Field className={fields.description}
                 title="Описание"
                 hint=""
                 value={description}

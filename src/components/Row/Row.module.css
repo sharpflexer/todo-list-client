@@ -1,12 +1,17 @@
   .background {
     display:flex;
     flex-direction: column;
-    width: 50svw;
-    height: 10svh;
+    width: 1000px;
+    height: 80px;
+    justify-content: flex-end;
   }
 
   .underline {
     height: 3px;
+    max-height: 3px;
+    min-height: 3px;
+    width: 100%;
+    margin-bottom: 0px;
     background-color: #3f72af;
   }
 

@@ -1,4 +1,4 @@
-import classes from "../../fields.module.css"
+import fields from "../../fields.module.css"
 import { Task } from "../../../TaskList/TaskList";
 import Modal, { IModalProps } from "../../Modal/Modal";
 
@@ -15,8 +15,13 @@ const ModalDeleteTask = ({ active, setActive, task, deletePage }: IModalDeletePr
     }
 
     return (
-        <Modal active={active} setActive={setActive} submitClick={deleteClick}>
-            <label className={classes.deleteMessage}>Вы уверены, что хотите удалить задачу {task.name}?</label>
+        <Modal title="Удаление задачи"
+            submitName="Да"
+            cancelName="Нет"
+            active={active}
+            setActive={setActive}
+            submitClick={deleteClick}>
+            <label className={fields.deleteMessage}>Вы уверены, что хотите удалить задачу {task.name}?</label>
         </Modal>
     );
 }

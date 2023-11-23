@@ -1,20 +1,32 @@
-interface IModalDeleteProps {
+import Modal, { IModalProps } from "../../Modal/Modal";
+import fields from "../../fields.module.css";
+
+export type Category = {
     id: number;
     name: string;
+    description: string;
 }
 
-const ModalDeleteCategory: React.FC<IModalDeleteProps> = ({ id, name }) => {
+interface IDeleteCategory extends IModalProps {
+    category: Category;
+    deleteCategory: (id: number) => void
+}
+
+const ModalDeleteCategory = ({active, setActive, deleteCategory, category}:IDeleteCategory) => {
     function deleteClick() {
-        deleteCategory(id)
+        deleteCategory(category.id)
+        setActive(false);
     }
 
     return (
-        <div>
-            <div className="modalContent"></div>
-            <div className="title">Удаление категории</div>
-            <label className="deleteMessage">Вы уверены, что хотите удалить категорию "{name}"?</label>
-            <img className="close" src="svg/close.svg" alt="" onClick={() => { }}></img>
-        </div>
+        <Modal title="Создание категории"
+            submitName="Создать"
+            cancelName="Закрыть"
+            active={active}
+            setActive={setActive}
+            submitClick={deleteClick}>
+            <label className={fields.deleteMessage}>Вы уверены, что хотите удалить категорию "{category.name}"?</label>
+        </Modal>
     );
 }
 

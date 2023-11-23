@@ -24,7 +24,6 @@ function TaskList() {
 
     const onEdit = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
-
         setCurrentData(currentTask[0]);
 
         setEditModalActive(true);
@@ -59,7 +58,7 @@ function TaskList() {
     const dataFetch = async () => {
         const data = await (
             await fetch(
-                'http://192.168.100.222:8089/api/ToDoList/GetTasks',
+                'http://192.168.100.229:8089/api/ToDoList/GetTasks',
             )
         ).json();
 
@@ -89,7 +88,7 @@ function TaskList() {
 }
 
 async function updateTask(task: Task) {
-    await fetch('http://192.168.100.222:8089/api/ToDoList/UpdateTask', {
+    await fetch('http://192.168.100.229:8089/api/ToDoList/UpdateTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -100,7 +99,7 @@ async function updateTask(task: Task) {
 }
 
 async function deleteTask(id: number) {
-    await fetch('http://192.168.100.222:8089/api/ToDoList/RemoveTask/' + id, {
+    await fetch('http://192.168.100.229:8089/api/ToDoList/RemoveTask/' + id, {
         method: 'GET'
     });
 }

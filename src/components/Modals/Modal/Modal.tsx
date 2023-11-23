@@ -4,13 +4,16 @@ import classes from "./Modal.module.css";
 import ReactDOM from 'react-dom';
 
 export interface IModalProps {
+    title?: string;
+    submitName?: string;
+    cancelName?: string;
     active: boolean;
     setActive: (value: boolean) => void;
     submitClick?: () => void;
     children?: React.ReactNode;
 }
 
-const Modal: React.FC<IModalProps> = ({ active, setActive, submitClick, children }) => {
+const Modal = ({ title, submitName, cancelName, active, setActive, submitClick, children }: IModalProps) => {
     function closeModal() {
         setActive(false);
     }
@@ -21,7 +24,7 @@ const Modal: React.FC<IModalProps> = ({ active, setActive, submitClick, children
         <div className={classes.modal} onClick={() => setActive?.(false)}>
             <div className={classes.modal__content} onClick={(e) => e.stopPropagation()}>
                 <div className={classes.header}>
-                    <div className={classes.title}>Создание задачи</div>
+                    <div className={classes.title}>{title ? title : ""}</div>
                     <img className={classes.close} src="svg/close.svg" alt="" onClick={closeModal}></img>
                 </div>
                 <div className={classes.children}>
@@ -29,9 +32,9 @@ const Modal: React.FC<IModalProps> = ({ active, setActive, submitClick, children
                 </div>
                 <div className={classes.buttonPanel}>
                     <button className={classes.submit}
-                        onClick={submitClick ? submitClick : () => { }}>Создать</button>
+                        onClick={submitClick ? submitClick : () => { }}>{submitName}</button>
                     <button className={classes.cancel}
-                        onClick={closeModal} >Закрыть</button>
+                        onClick={closeModal} >{cancelName}</button>
                 </div>
             </div>
         </div >

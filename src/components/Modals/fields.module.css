@@ -8,24 +8,18 @@
 }
 
 .name {
-    outline: solid 2px #3f72af;
-    outline-offset: -2px;
-    border-radius: 4px;
-    background-color: #dbe2ef;
+    width: 364px;
+    height: 46px;
 }
 
 .category {
-    outline: solid 2px #3f72af;
-    outline-offset: -2px;
-    border-radius: 4px;
-    background-color: #dbe2ef;
+    width: 364px;
+    height: 46px;
 }
 
 .description {
-    outline: solid 2px #3f72af;
-    outline-offset: -2px;
-    border-radius: 4px;
-    background-color: #dbe2ef;
+    width: 752px;
+    height: 82px;
 }
 
 /* В ModalDelete */

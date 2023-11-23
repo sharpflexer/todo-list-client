@@ -14,7 +14,6 @@ export interface IFields {
 }
 
 const ModalCreateTask = ({ active, setActive }: IModalProps) => {
-
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();
 
     function createClick() {
@@ -22,7 +21,12 @@ const ModalCreateTask = ({ active, setActive }: IModalProps) => {
         setActive(false);
     }
     return (
-        <Modal active={active} setActive={setActive} submitClick={createClick}>
+        <Modal title="Создание задачи"
+            submitName="Создать"
+            cancelName="Закрыть"
+            active={active}
+            setActive={setActive}
+            submitClick={createClick}>
             <div className={fields.topLayer}>
                 <Field className={fields.name}
                     title="Имя"
@@ -48,7 +52,7 @@ const ModalCreateTask = ({ active, setActive }: IModalProps) => {
 }
 
 function createTask(name: string, description: string, category: string) {
-    fetch('http://192.168.100.222:8089/api/ToDoList/AddTask', {
+    fetch('http://192.168.100.229:8089/api/ToDoList/AddTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
