@@ -1,11 +1,6 @@
+import { Category } from "../../../CategoryList/CategoryList";
 import Modal, { IModalProps } from "../../Modal/Modal";
 import fields from "../../fields.module.css";
-
-export type Category = {
-    id: number;
-    name: string;
-    description: string;
-}
 
 interface IDeleteCategory extends IModalProps {
     category: Category;
@@ -29,20 +24,6 @@ const ModalDeleteCategory = ({active, setActive, deleteCategory, category}:IDele
         </Modal>
     );
 }
-
-function deleteCategory(id: number) {
-    fetch('http://192.168.100.206:8089/api/ToDoList/DeleteCategory', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: { id }
-        })
-    });
-}
-
 
 
 export default ModalDeleteCategory;

@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Row from '../Row/Row';
-import classes from './TaskList.module.css';
-import ModalEdit from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
-import ModalEditTask from '../Modals/Tasks/ModalEditTask/ModalEditTask';
-import Modal from '../Modals/Modal/Modal';
-import ModalDeleteTask from '../Modals/Tasks/ModalDeleteTask/ModalDeleteTask';
+import classes from './CategoryList.module.css';
+import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
+import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
 
-export type Task = {
+export type Category = {
     id: number;
     name: string;
     description: string;
-    categoryId: number;
 }
 
-function TaskList({active}:{active:boolean}) {
-    const [data, setData] = useState<Task[]>([]);
-    const [currentData, setCurrentData] = useState<Task>({ id: 0, name: "", description: "", categoryId: 0 });
+function CategoryList({active}:{active:boolean}) {
+    const [data, setData] = useState<Category[]>([]);
+    const [currentData, setCurrentData] = useState<Category>({ id: 0, name: "", description: ""});
 
     const [editModalActive, setEditModalActive] = useState<boolean>(false);
     const [deleteModalActive, setDeleteModalActive] = useState<boolean>(false);
@@ -35,28 +32,28 @@ function TaskList({active}:{active:boolean}) {
         setDeleteModalActive(true);
     }
 
-    const onEditUpdate = (task: Task) => {
+    const onEditUpdate = (category: Category) => {
         setEditModalActive(false);
 
-        updateTask(task).then(() => {
-            const oldTasks = data.filter((d) => d.id !== task.id);
-            setData([task, ...oldTasks])
+        updateCategory(category).then(() => {
+            const oldCategories = data.filter((d) => d.id !== category.id);
+            setData([category, ...oldCategories])
         });
     }
 
     const onDeleteUpdate = (id: number) => {
         setDeleteModalActive(false);
 
-        deleteTask(id).then(() => {
-            const oldTasks = data.filter((d) => d.id !== id);
-            setData(oldTasks)
+        deleteCategory(id).then(() => {
+            const oldCategories = data.filter((d) => d.id !== id);
+            setData(oldCategories)
         });
     }
     // fetch data
     const dataFetch = async () => {
         const data = await (
             await fetch(
-                'http://localhost:8089/api/ToDoList/GetTasks',
+                'http://localhost:8089/api/ToDoList/GetCategories',
             )
         ).json();
 
@@ -79,27 +76,27 @@ function TaskList({active}:{active:boolean}) {
             <div className={classes.tasklist}>
                 {listItems}
             </div>
-            <ModalEditTask active={editModalActive} setActive={setEditModalActive} task={currentData} updatePage={onEditUpdate} />
-            <ModalDeleteTask active={deleteModalActive} setActive={setDeleteModalActive} task={currentData} deletePage={onDeleteUpdate} />
+            <ModalEditCategory active={editModalActive} setActive={setEditModalActive} category={currentData} updatePage={onEditUpdate} />
+            <ModalDeleteCategory active={deleteModalActive} setActive={setDeleteModalActive} category={currentData} deleteCategory={onDeleteUpdate} />
         </div>
     ): null;
 }
 
-async function updateTask(task: Task) {
-    await fetch('http://localhost:8089/api/ToDoList/UpdateTask', {
+async function updateCategory(category: Category) {
+    await fetch('http://localhost:8089/api/ToDoList/UpdateCategory', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(task)
+        body: JSON.stringify(category)
     });
 }
 
-async function deleteTask(id: number) {
-    await fetch('http://localhost:8089/api/ToDoList/RemoveTask/' + id, {
+async function deleteCategory(id: number) {
+    await fetch('http://localhost:8089/api/ToDoList/RemoveCategory/' + id, {
         method: 'GET'
     });
 }
 
-export default TaskList;
+export default CategoryList;

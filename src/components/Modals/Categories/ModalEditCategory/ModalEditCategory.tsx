@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Field from "../../../Field/Field";
 import Modal, { IModalProps } from "../../Modal/Modal";
-import { Category } from "../ModalDeleteCategory/ModalDeleteCategory";
 import fields from "../../fields.module.css";
+import { Category } from "../../../CategoryList/CategoryList";
 
 interface IEditCategory extends IModalProps {
     category: Category;
-    editCategory: (id: number) => void
+    updatePage: (category: Category) => void
 }
 
-const ModalEdit = ({ active, setActive, category, editCategory }: IEditCategory) => {
+const ModalEditCategory = ({ active, setActive, category, updatePage}: IEditCategory) => {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
@@ -19,7 +19,7 @@ const ModalEdit = ({ active, setActive, category, editCategory }: IEditCategory)
     }, [category, setName, setDescription]);
 
     function updateClick() {
-        updateTask(category.id, name, description)
+        updatePage({id:category.id, name, description})
         setActive(false);
     }
 
@@ -50,21 +50,4 @@ const ModalEdit = ({ active, setActive, category, editCategory }: IEditCategory)
     );
 }
 
-function updateTask(id: number, name: string, description: string) {
-    fetch('http://192.168.100.206:8089/api/ToDoList/UpdateCategory', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            id: { id },
-            name: { name },
-            description: { description },
-        })
-    });
-}
-
-
-
-export default ModalEdit;
+export default ModalEditCategory;

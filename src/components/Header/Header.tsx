@@ -7,10 +7,22 @@ import classes from "./Header.module.css";
 
 //Работает
 interface IActive {
-    setModalActive: (value: boolean) => void
+    setModalActive: (value: boolean) => void;
+    setTasksActive: (value: boolean) => void;
+    setCategoriesActive: (value: boolean) => void;
 }
 
-function Header({ setModalActive }: IActive) {
+function Header({ setModalActive, setTasksActive, setCategoriesActive }: IActive) {
+    function enableTasks(){
+        setCategoriesActive(false);
+        setTasksActive(true);
+    }
+    
+    function enableCategories(){
+        setTasksActive(false);
+        setCategoriesActive(true);
+    }
+
     const [name, setName] = useState<string>('');
     const [category, setCategory] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -18,9 +30,9 @@ function Header({ setModalActive }: IActive) {
     return (
         <div className={classes.layout}>
             <label className={classes.todo}>ToDo List</label>
-            <div className={classes.element + " " + classes.tasks}>Задачи</div>
+            <div className={classes.element + " " + classes.tasks} onClick={enableTasks}>Задачи</div>
             <div className={classes.vbar}>|</div>
-            <div className={classes.element + " " + classes.categories}>Категории</div>
+            <div className={classes.element + " " + classes.categories} onClick={enableCategories}>Категории</div>
             <div className={classes.element + " " + classes.createLink} onClick={() => setModalActive(true)}>Добавить задачу</div>
         </div>
     );
