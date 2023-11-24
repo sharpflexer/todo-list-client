@@ -14,9 +14,9 @@ const ModalDeleteCategory = ({active, setActive, deleteCategory, category}:IDele
     }
 
     return (
-        <Modal title="Создание категории"
-            submitName="Создать"
-            cancelName="Закрыть"
+        <Modal title="Удаление категории"
+            submitName="Да"
+            cancelName="Нет"
             active={active}
             setActive={setActive}
             submitClick={deleteClick}>

@@ -15,7 +15,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header setModalActive = {setTaskActive} setTasksActive = {setTasksActive} setCategoriesActive={setCategoriesActive}/>
+      <Header createLinkText= {tasksActive ? "Добавить задачу" : "Добавить категорию"}
+        setModalActive = {tasksActive ? setTaskActive : setCategoryActive} 
+        setTasksActive = {setTasksActive} 
+        setCategoriesActive={setCategoriesActive}/>
       <TaskList active = {tasksActive}/>
       <CategoryList active = {categoriesActive}/>
       <ModalCreateTask active={taskActive} setActive={setTaskActive}/>

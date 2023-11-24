@@ -7,12 +7,16 @@ import classes from "./Header.module.css";
 
 //Работает
 interface IActive {
+    createLinkText: string;
     setModalActive: (value: boolean) => void;
     setTasksActive: (value: boolean) => void;
     setCategoriesActive: (value: boolean) => void;
 }
 
-function Header({ setModalActive, setTasksActive, setCategoriesActive }: IActive) {
+function Header({createLinkText, setModalActive, setTasksActive, setCategoriesActive }: IActive) {
+    const [taskCreateActive, setTaskCreateActive] = useState<boolean>(true);
+    const [categoryCreateActive, setCategoryCreateActive] = useState<boolean>(false);
+
     function enableTasks(){
         setCategoriesActive(false);
         setTasksActive(true);
@@ -22,10 +26,7 @@ function Header({ setModalActive, setTasksActive, setCategoriesActive }: IActive
         setTasksActive(false);
         setCategoriesActive(true);
     }
-
-    const [name, setName] = useState<string>('');
-    const [category, setCategory] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
+    
     //TODO: Обернуть tasklist в context
     return (
         <div className={classes.layout}>
@@ -33,7 +34,7 @@ function Header({ setModalActive, setTasksActive, setCategoriesActive }: IActive
             <div className={classes.element + " " + classes.tasks} onClick={enableTasks}>Задачи</div>
             <div className={classes.vbar}>|</div>
             <div className={classes.element + " " + classes.categories} onClick={enableCategories}>Категории</div>
-            <div className={classes.element + " " + classes.createLink} onClick={() => setModalActive(true)}>Добавить задачу</div>
+            <div className={classes.element + " " + classes.createLink} onClick={() => setModalActive(true)}>{createLinkText}</div>
         </div>
     );
 }

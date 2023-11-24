@@ -71,6 +71,7 @@ function TaskList({active}:{active:boolean}) {
         <Row id={task.id}
             name={task.name}
             description={task.description}
+            categoryId={task.categoryId}
             onClickEdit={onEdit}
             onClickDelete={onDelete} />
     ));

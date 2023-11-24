@@ -3,6 +3,7 @@ import Row from '../Row/Row';
 import classes from './CategoryList.module.css';
 import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
 import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
+import CategoryRow from '../CategoryRow/CategoryRow';
 
 export type Category = {
     id: number;
@@ -65,7 +66,7 @@ function CategoryList({active}:{active:boolean}) {
     }, []);
 
     const listItems = data.map(task => (
-        <Row id={task.id}
+        <CategoryRow id={task.id}
             name={task.name}
             description={task.description}
             onClickEdit={onEdit}
