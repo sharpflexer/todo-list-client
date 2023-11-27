@@ -47,7 +47,7 @@ function ModalCreateCategory({active, setActive} : IModalProps) {
 }
 
 function createCategory(name: string, description: string) {
-    fetch('http://192.168.100.206:8089/api/ToDoList/AddCategory', {
+    fetch('http://192.168.100.229:8089/api/ToDoList/AddCategory', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

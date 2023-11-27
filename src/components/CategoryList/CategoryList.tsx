@@ -54,7 +54,7 @@ function CategoryList({active}:{active:boolean}) {
     const dataFetch = async () => {
         const data = await (
             await fetch(
-                'http://localhost:8089/api/ToDoList/GetCategories',
+                'http://192.168.100.229:8089/api/ToDoList/GetCategories',
             )
         ).json();
 
@@ -84,7 +84,7 @@ function CategoryList({active}:{active:boolean}) {
 }
 
 async function updateCategory(category: Category) {
-    await fetch('http://localhost:8089/api/ToDoList/UpdateCategory', {
+    await fetch('http://192.168.100.229:8089/api/ToDoList/UpdateCategory', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -95,7 +95,7 @@ async function updateCategory(category: Category) {
 }
 
 async function deleteCategory(id: number) {
-    await fetch('http://localhost:8089/api/ToDoList/RemoveCategory/' + id, {
+    await fetch('http://192.168.100.229:8089/api/ToDoList/RemoveCategory/' + id, {
         method: 'GET'
     });
 }

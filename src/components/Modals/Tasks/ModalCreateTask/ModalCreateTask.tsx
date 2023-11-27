@@ -52,7 +52,7 @@ const ModalCreateTask = ({ active, setActive }: IModalProps) => {
 }
 
 function createTask(name: string, description: string, category: string) {
-    fetch('http://localhost:8089/api/ToDoList/AddTask', {
+    fetch('http://192.168.100.229:8089/api/ToDoList/AddTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

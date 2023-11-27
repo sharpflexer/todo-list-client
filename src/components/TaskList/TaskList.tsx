@@ -56,7 +56,7 @@ function TaskList({active}:{active:boolean}) {
     const dataFetch = async () => {
         const data = await (
             await fetch(
-                'http://localhost:8089/api/ToDoList/GetTasks',
+                'http://192.168.100.229:8089/api/ToDoList/GetTasks',
             )
         ).json();
 
@@ -87,7 +87,7 @@ function TaskList({active}:{active:boolean}) {
 }
 
 async function updateTask(task: Task) {
-    await fetch('http://localhost:8089/api/ToDoList/UpdateTask', {
+    await fetch('http://192.168.100.229:8089/api/ToDoList/UpdateTask', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -98,7 +98,7 @@ async function updateTask(task: Task) {
 }
 
 async function deleteTask(id: number) {
-    await fetch('http://localhost:8089/api/ToDoList/RemoveTask/' + id, {
+    await fetch('http://192.168.100.229:8089/api/ToDoList/RemoveTask/' + id, {
         method: 'GET'
     });
 }
