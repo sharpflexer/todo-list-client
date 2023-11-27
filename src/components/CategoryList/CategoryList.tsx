@@ -5,6 +5,8 @@ import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditC
 import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
 import CategoryRow from '../CategoryRow/CategoryRow';
 import { RequestService } from '../../services/RequestService';
+import { IList } from '../TaskList/TaskList';
+import ModalCreateCategory from '../Modals/Categories/ModalCreateCategory/ModalCreateCategory';
 
 export type Category = {
     id: number;
@@ -12,18 +14,18 @@ export type Category = {
     description: string;
 }
 
-function CategoryList({active}:{active:boolean}) {
+function CategoryList({active, createActive, setCreateActive}:IList) {
     const [data, setData] = useState<Category[]>([]);
     const [currentData, setCurrentData] = useState<Category>({ id: 0, name: "", description: ""});
 
-    const [editModalActive, setEditModalActive] = useState<boolean>(false);
+    const [editModalActive, setEditActive] = useState<boolean>(false);
     const [deleteModalActive, setDeleteModalActive] = useState<boolean>(false);
 
     const onEdit = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
         setCurrentData(currentTask[0]);
 
-        setEditModalActive(true);
+        setEditActive(true);
     }
 
     const onDelete = (id: number) => {
@@ -33,9 +35,16 @@ function CategoryList({active}:{active:boolean}) {
 
         setDeleteModalActive(true);
     }
+    const onCreateUpdate = (category: Category) => {
+        setCreateActive(false);
+
+        RequestService.createCategory(category).then(() => {
+            setData([category, ...data].reverse());
+        });
+    }
 
     const onEditUpdate = (category: Category) => {
-        setEditModalActive(false);
+        setEditActive(false);
 
         RequestService.updateCategory(category).then(() => {
             const oldCategories = data.filter((d) => d.id !== category.id);
@@ -73,7 +82,8 @@ function CategoryList({active}:{active:boolean}) {
             <div className={classes.tasklist}>
                 {listItems}
             </div>
-            <ModalEditCategory active={editModalActive} setActive={setEditModalActive} category={currentData} updatePage={onEditUpdate} />
+            <ModalCreateCategory active={createActive} setActive={setCreateActive} updatePage={onCreateUpdate}/>
+            <ModalEditCategory active={editModalActive} setActive={setEditActive} category={currentData} updatePage={onEditUpdate} />
             <ModalDeleteCategory active={deleteModalActive} setActive={setDeleteModalActive} category={currentData} deleteCategory={onDeleteUpdate} />
         </div>
     ): null;

@@ -7,22 +7,22 @@ import ModalCreateCategory from './components/Modals/Categories/ModalCreateCateg
 import CategoryList from './components/CategoryList/CategoryList';
 
 function App() {
-  const [taskActive, setTaskActive] = useState<boolean>(false);
-  const [categoryActive, setCategoryActive] = useState<boolean>(false);
+  // For Create Modals
+  const [taskModalActive, setTaskModalActive] = useState<boolean>(false);
+  const [categoryModalActive, setCategoryModalActive] = useState<boolean>(false);
 
-  const [tasksActive, setTasksActive] = useState<boolean>(true);
-  const [categoriesActive, setCategoriesActive] = useState<boolean>(false);
+  // For Lists
+  const [taskListActive, setTaskListActive] = useState<boolean>(true);
+  const [categoryListActive, setCategoryListActive] = useState<boolean>(false);
 
   return (
     <div className="App">
-      <Header createLinkText= {tasksActive ? "Добавить задачу" : "Добавить категорию"}
-        setModalActive = {tasksActive ? setTaskActive : setCategoryActive} 
-        setTasksActive = {setTasksActive} 
-        setCategoriesActive={setCategoriesActive}/>
-      <TaskList active = {tasksActive}/>
-      <CategoryList active = {categoriesActive}/>
-      <ModalCreateTask active={taskActive} setActive={setTaskActive}/>
-      <ModalCreateCategory active={categoryActive} setActive={setCategoryActive}/>
+      <Header createLinkText= {taskListActive ? "Добавить задачу" : "Добавить категорию"}
+        setModalActive = {taskListActive ? setTaskModalActive : setCategoryModalActive} 
+        setTasksActive = {setTaskListActive} 
+        setCategoriesActive={setCategoryListActive}/>
+      <TaskList active = {taskListActive} createActive = {taskModalActive} setCreateActive = {setTaskModalActive}/>
+      <CategoryList active = {categoryListActive} createActive = {categoryModalActive} setCreateActive = {setCategoryModalActive}/>
     </div>
   );
 }

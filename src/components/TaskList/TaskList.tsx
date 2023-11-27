@@ -6,6 +6,9 @@ import ModalEditTask from '../Modals/Tasks/ModalEditTask/ModalEditTask';
 import Modal from '../Modals/Modal/Modal';
 import ModalDeleteTask from '../Modals/Tasks/ModalDeleteTask/ModalDeleteTask';
 import {RequestService} from "../../services/RequestService";
+import ModalCreateTask from '../Modals/Tasks/ModalCreateTask/ModalCreateTask';
+
+
 
 export type Task = {
     id: number;
@@ -14,18 +17,24 @@ export type Task = {
     categoryId: number;
 }
 
-function TaskList({active}:{active:boolean}) {
+export interface IList{
+    active: boolean;
+    createActive: boolean;
+    setCreateActive: (value: boolean) => void;
+}
+
+function TaskList({active, createActive, setCreateActive}: IList) {
     const [data, setData] = useState<Task[]>([]);
     const [currentData, setCurrentData] = useState<Task>({ id: 0, name: "", description: "", categoryId: 0 });
 
-    const [editModalActive, setEditModalActive] = useState<boolean>(false);
-    const [deleteModalActive, setDeleteModalActive] = useState<boolean>(false);
+    const [editActive, setEditActive] = useState<boolean>(false);
+    const [deleteActive, setDeleteActive] = useState<boolean>(false);
 
     const onEdit = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
         setCurrentData(currentTask[0]);
 
-        setEditModalActive(true);
+        setEditActive(true);
     }
 
     const onDelete = (id: number) => {
@@ -33,12 +42,20 @@ function TaskList({active}:{active:boolean}) {
 
         setCurrentData(currentTask[0]);
 
-        setDeleteModalActive(true);
+        setDeleteActive(true);
+    }
+
+    const onCreateUpdate = (task: Task) => {
+        setCreateActive(false);
+
+        RequestService.createTask(task).then(() => {
+            setData([task, ...data].reverse())
+        });
     }
 
     const onEditUpdate = (task: Task) => {
-        setEditModalActive(false);
-
+        setEditActive(false);
+        
         RequestService.updateTask(task).then(() => {
             const oldTasks = data.filter((d) => d.id !== task.id);
             setData([task, ...oldTasks])
@@ -46,7 +63,7 @@ function TaskList({active}:{active:boolean}) {
     }
 
     const onDeleteUpdate = (id: number) => {
-        setDeleteModalActive(false);
+        setDeleteActive(false);
 
         RequestService.deleteTask(id).then(() => {
             const oldTasks = data.filter((d) => d.id !== id);
@@ -76,8 +93,9 @@ function TaskList({active}:{active:boolean}) {
             <div className={classes.tasklist}>
                 {listItems}
             </div>
-            <ModalEditTask active={editModalActive} setActive={setEditModalActive} task={currentData} updatePage={onEditUpdate} />
-            <ModalDeleteTask active={deleteModalActive} setActive={setDeleteModalActive} task={currentData} deletePage={onDeleteUpdate} />
+            <ModalCreateTask active={createActive} setActive={setCreateActive} updatePage = {onCreateUpdate}/>
+            <ModalEditTask active={editActive} setActive={setEditActive} task={currentData} updatePage={onEditUpdate} />
+            <ModalDeleteTask active={deleteActive} setActive={setDeleteActive} task={currentData} deletePage={onDeleteUpdate} />
         </div>
     ): null;
 }

@@ -9,7 +9,7 @@ interface IDeleteCategory extends IModalProps {
 
 const ModalDeleteCategory = ({active, setActive, deleteCategory, category}:IDeleteCategory) => {
     function deleteClick() {
-        deleteCategory(category.id!)
+        deleteCategory(category.id)
         setActive(false);
     }
 

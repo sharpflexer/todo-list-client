@@ -15,16 +15,21 @@ export interface IFields {
     setDescription: (value: string) => void;
 }
 
-const ModalCreateTask = ({ active, setActive }: IModalProps) => {
+ interface IModalCreateProps extends IModalProps {
+    updatePage: (task: Task) => void;
+}
+
+const ModalCreateTask = ({ active, setActive, updatePage }: IModalCreateProps) => {
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();
 
     function createClick() {
-        RequestService.createTask(
-                name,
-                description,
-                Number(category)
-            );
-        setActive(false);
+        const task: Task = {
+            id: 0,
+            name,
+            description,
+            categoryId: Number(category)
+        }
+        updatePage(task);
     }
     return (
         <Modal title="Создание задачи"

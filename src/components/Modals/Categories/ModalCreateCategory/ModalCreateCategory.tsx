@@ -3,6 +3,7 @@ import Field from "../../../Field/Field";
 import Modal, { IModalProps } from "../../Modal/Modal";
 import fields from "../../fields.module.css";
 import { RequestService } from "../../../../services/RequestService";
+import { Category } from "../../../CategoryList/CategoryList";
 
 export interface ICategoryFields {
     name: string;
@@ -11,13 +12,22 @@ export interface ICategoryFields {
     setDescription: (value: string) => void;
 }
 
-function ModalCreateCategory({active, setActive} : IModalProps) {
+export interface ICategoryCreateProps extends IModalProps {
+    updatePage: (category: Category) => void;
+}
+
+function ModalCreateCategory({active, setActive, updatePage} : ICategoryCreateProps) {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
     function createClick() {      
-        RequestService.createCategory(name, description);
-        setActive(false);
+        let category: Category = {
+            id: 0,
+            name, 
+            description
+        }
+        RequestService.createCategory(category);
+        updatePage(category);
     }
 
     return (
