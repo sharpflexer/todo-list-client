@@ -10,7 +10,7 @@ interface IModalDeleteProps extends IModalProps {
 const ModalDeleteTask = ({ active, setActive, task, deletePage }: IModalDeleteProps) => {
 
     function deleteClick() {
-        deletePage(task.id);
+        deletePage(task.id!);
         setActive(false);
     }
 

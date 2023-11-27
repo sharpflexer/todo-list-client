@@ -4,6 +4,7 @@ import classes from './CategoryList.module.css';
 import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
 import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
 import CategoryRow from '../CategoryRow/CategoryRow';
+import { RequestService } from '../../services/RequestService';
 
 export type Category = {
     id: number;
@@ -36,7 +37,7 @@ function CategoryList({active}:{active:boolean}) {
     const onEditUpdate = (category: Category) => {
         setEditModalActive(false);
 
-        updateCategory(category).then(() => {
+        RequestService.updateCategory(category).then(() => {
             const oldCategories = data.filter((d) => d.id !== category.id);
             setData([category, ...oldCategories])
         });
@@ -45,19 +46,14 @@ function CategoryList({active}:{active:boolean}) {
     const onDeleteUpdate = (id: number) => {
         setDeleteModalActive(false);
 
-        deleteCategory(id).then(() => {
+        RequestService.deleteCategory(id).then(() => {
             const oldCategories = data.filter((d) => d.id !== id);
             setData(oldCategories)
         });
     }
     // fetch data
     const dataFetch = async () => {
-        const data = await (
-            await fetch(
-                'http://192.168.100.229:8089/api/ToDoList/GetCategories',
-            )
-        ).json();
-
+        const data = await RequestService.readCategories();
         setData(data);
     };
 
@@ -66,7 +62,7 @@ function CategoryList({active}:{active:boolean}) {
     }, []);
 
     const listItems = data.map(task => (
-        <CategoryRow id={task.id}
+        <CategoryRow id={task.id!}
             name={task.name}
             description={task.description}
             onClickEdit={onEdit}
@@ -81,23 +77,6 @@ function CategoryList({active}:{active:boolean}) {
             <ModalDeleteCategory active={deleteModalActive} setActive={setDeleteModalActive} category={currentData} deleteCategory={onDeleteUpdate} />
         </div>
     ): null;
-}
-
-async function updateCategory(category: Category) {
-    await fetch('http://192.168.100.229:8089/api/ToDoList/UpdateCategory', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(category)
-    });
-}
-
-async function deleteCategory(id: number) {
-    await fetch('http://192.168.100.229:8089/api/ToDoList/RemoveCategory/' + id, {
-        method: 'GET'
-    });
 }
 
 export default CategoryList;

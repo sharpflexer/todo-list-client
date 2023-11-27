@@ -5,6 +5,7 @@ import ModalEdit from '../Modals/Categories/ModalEditCategory/ModalEditCategory'
 import ModalEditTask from '../Modals/Tasks/ModalEditTask/ModalEditTask';
 import Modal from '../Modals/Modal/Modal';
 import ModalDeleteTask from '../Modals/Tasks/ModalDeleteTask/ModalDeleteTask';
+import {RequestService} from "../../services/RequestService";
 
 export type Task = {
     id: number;
@@ -38,7 +39,7 @@ function TaskList({active}:{active:boolean}) {
     const onEditUpdate = (task: Task) => {
         setEditModalActive(false);
 
-        updateTask(task).then(() => {
+        RequestService.updateTask(task).then(() => {
             const oldTasks = data.filter((d) => d.id !== task.id);
             setData([task, ...oldTasks])
         });
@@ -47,19 +48,14 @@ function TaskList({active}:{active:boolean}) {
     const onDeleteUpdate = (id: number) => {
         setDeleteModalActive(false);
 
-        deleteTask(id).then(() => {
+        RequestService.deleteTask(id).then(() => {
             const oldTasks = data.filter((d) => d.id !== id);
             setData(oldTasks)
         });
     }
     // fetch data
     const dataFetch = async () => {
-        const data = await (
-            await fetch(
-                'http://192.168.100.229:8089/api/ToDoList/GetTasks',
-            )
-        ).json();
-
+        const data = await RequestService.readTasks();
         setData(data);
     };
 
@@ -68,7 +64,7 @@ function TaskList({active}:{active:boolean}) {
     }, []);
 
     const listItems = data.map(task => (
-        <Row id={task.id}
+        <Row id={task.id!}
             name={task.name}
             description={task.description}
             categoryId={task.categoryId}
@@ -84,23 +80,6 @@ function TaskList({active}:{active:boolean}) {
             <ModalDeleteTask active={deleteModalActive} setActive={setDeleteModalActive} task={currentData} deletePage={onDeleteUpdate} />
         </div>
     ): null;
-}
-
-async function updateTask(task: Task) {
-    await fetch('http://192.168.100.229:8089/api/ToDoList/UpdateTask', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task)
-    });
-}
-
-async function deleteTask(id: number) {
-    await fetch('http://192.168.100.229:8089/api/ToDoList/RemoveTask/' + id, {
-        method: 'GET'
-    });
 }
 
 export default TaskList;

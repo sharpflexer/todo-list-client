@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import Field from "../../../Field/Field";
 import Modal, { IModalProps } from "../../Modal/Modal";
 import fields from "../../fields.module.css";
+import { RequestService } from "../../../../services/RequestService";
 
 export interface ICategoryFields {
     name: string;
@@ -14,8 +15,8 @@ function ModalCreateCategory({active, setActive} : IModalProps) {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
-    function createClick() {
-        createCategory(name, description)
+    function createClick() {      
+        RequestService.createCategory(name, description);
         setActive(false);
     }
 
@@ -45,21 +46,5 @@ function ModalCreateCategory({active, setActive} : IModalProps) {
         </Modal>
     );
 }
-
-function createCategory(name: string, description: string) {
-    fetch('http://192.168.100.229:8089/api/ToDoList/AddCategory', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: { name },
-            description: { description },
-        })
-    });
-}
-
-
 
 export default ModalCreateCategory;

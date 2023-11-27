@@ -3,6 +3,8 @@ import { IModalProps } from "..//..//Modal/Modal";
 import fields from "../../fields.module.css";
 import Modal from "../../Modal/Modal";
 import useFieldsState from "../../../../hooks/useFieldsState";
+import { RequestService } from "../../../../services/RequestService";
+import { Task } from "../../../TaskList/TaskList";
 
 export interface IFields {
     name: string;
@@ -17,7 +19,11 @@ const ModalCreateTask = ({ active, setActive }: IModalProps) => {
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();
 
     function createClick() {
-        createTask(name, description, category);
+        RequestService.createTask(
+                name,
+                description,
+                Number(category)
+            );
         setActive(false);
     }
     return (
@@ -49,21 +55,6 @@ const ModalCreateTask = ({ active, setActive }: IModalProps) => {
                 setValue={setDescription} />
         </Modal>
     );
-}
-
-function createTask(name: string, description: string, category: string) {
-    fetch('http://192.168.100.229:8089/api/ToDoList/AddTask', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: name,
-            description: description,
-            categoryId: category
-        })
-    });
 }
 
 export default ModalCreateTask;
