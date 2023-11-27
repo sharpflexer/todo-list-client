@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import {IFields} from "../components/Modals/Tasks/ModalCreateTask/ModalCreateTask"
+import IFields from "../interfaces/IFields";
 
 
 function useFieldsState(): IFields{
