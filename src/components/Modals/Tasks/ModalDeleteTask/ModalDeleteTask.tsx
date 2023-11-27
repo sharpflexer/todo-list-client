@@ -1,11 +1,6 @@
+import IModalDeleteProps from "../../../../interfaces/IModalDeleteProps";
+import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css"
-import { Task } from "../../../TaskList/TaskList";
-import Modal, { IModalProps } from "../../Modal/Modal";
-
-interface IModalDeleteProps extends IModalProps {
-    task: Task;
-    deletePage: (id: number) => void
-}
 
 const ModalDeleteTask = ({ active, setActive, task, deletePage }: IModalDeleteProps) => {
 

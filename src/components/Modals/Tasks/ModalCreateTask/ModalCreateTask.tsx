@@ -1,23 +1,9 @@
-import Field from "../../../Field/Field";
-import { IModalProps } from "..//..//Modal/Modal";
-import fields from "../../fields.module.css";
-import Modal from "../../Modal/Modal";
 import useFieldsState from "../../../../hooks/useFieldsState";
-import { RequestService } from "../../../../services/RequestService";
-import { Task } from "../../../TaskList/TaskList";
-
-export interface IFields {
-    name: string;
-    category: string;
-    description: string;
-    setName: (value: string) => void;
-    setCategory: (value: string) => void;
-    setDescription: (value: string) => void;
-}
-
- interface IModalCreateProps extends IModalProps {
-    updatePage: (task: Task) => void;
-}
+import IModalCreateProps from "../../../../interfaces/IModalCreateProps";
+import Task from "../../../../types/Task";
+import Field from "../../../Field/Field";
+import Modal from "../../Modal/Modal";
+import fields from "../../fields.module.css";
 
 const ModalCreateTask = ({ active, setActive, updatePage }: IModalCreateProps) => {
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();

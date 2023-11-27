@@ -1,17 +1,6 @@
-import React, { useState } from 'react';
-
+import IModalProps from "../../../interfaces/IModalProps";
 import classes from "./Modal.module.css";
 import ReactDOM from 'react-dom';
-
-export interface IModalProps {
-    title?: string;
-    submitName?: string;
-    cancelName?: string;
-    active: boolean;
-    setActive: (value: boolean) => void;
-    submitClick?: () => void;
-    children?: React.ReactNode;
-}
 
 const Modal = ({ title, submitName, cancelName, active, setActive, submitClick, children }: IModalProps) => {
     function closeModal() {

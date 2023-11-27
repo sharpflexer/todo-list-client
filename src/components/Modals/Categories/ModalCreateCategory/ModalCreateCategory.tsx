@@ -1,20 +1,11 @@
-import { useRef, useState } from "react";
-import Field from "../../../Field/Field";
-import Modal, { IModalProps } from "../../Modal/Modal";
-import fields from "../../fields.module.css";
+import { useState } from "react";
+import ICategoryCreateProps from "../../../../interfaces/ICategoryCreateProps";
 import { RequestService } from "../../../../services/RequestService";
-import { Category } from "../../../CategoryList/CategoryList";
+import Category from "../../../../types/Category";
+import Field from "../../../Field/Field";
+import Modal from "../../Modal/Modal";
+import fields from "../../fields.module.css";
 
-export interface ICategoryFields {
-    name: string;
-    description: string;
-    setName: (value: string) => void;
-    setDescription: (value: string) => void;
-}
-
-export interface ICategoryCreateProps extends IModalProps {
-    updatePage: (category: Category) => void;
-}
 
 function ModalCreateCategory({active, setActive, updatePage} : ICategoryCreateProps) {
     const [name, setName] = useState<string>('');

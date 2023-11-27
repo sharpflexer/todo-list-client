@@ -1,14 +1,9 @@
-import Field from "../../../Field/Field";
-import fields from "../../fields.module.css";
-import { Task } from "../../../TaskList/TaskList";
-import useFieldsState from "../../../../hooks/useFieldsState";
-import Modal, { IModalProps } from "../../Modal/Modal";
 import { useEffect } from "react";
-
-interface IModalEditProps extends IModalProps {
-    task: Task
-    updatePage: (task: Task) => void
-}
+import useFieldsState from "../../../../hooks/useFieldsState";
+import IModalEditProps from "../../../../interfaces/IModalEditProps";
+import Field from "../../../Field/Field";
+import Modal from "../../Modal/Modal";
+import fields from "../../fields.module.css";
 
 const ModalEditTask = ({ task, updatePage, active, setActive }: IModalEditProps) => {
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();

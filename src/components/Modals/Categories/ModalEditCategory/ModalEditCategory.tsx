@@ -1,13 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect } from "react";
+import IEditCategory from "../../../../interfaces/IEditCategory";
 import Field from "../../../Field/Field";
-import Modal, { IModalProps } from "../../Modal/Modal";
+import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css";
-import { Category } from "../../../CategoryList/CategoryList";
 
-interface IEditCategory extends IModalProps {
-    category: Category;
-    updatePage: (category: Category) => void
-}
+
 
 const ModalEditCategory = ({ active, setActive, category, updatePage}: IEditCategory) => {
     const [name, setName] = useState<string>('');

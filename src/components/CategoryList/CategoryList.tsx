@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Row from '../Row/Row';
-import classes from './CategoryList.module.css';
-import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
-import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
-import CategoryRow from '../CategoryRow/CategoryRow';
+import { useState, useEffect } from 'react';
+import IList from '../../interfaces/IList';
 import { RequestService } from '../../services/RequestService';
-import { IList } from '../TaskList/TaskList';
+import Category from '../../types/Category';
+import CategoryRow from '../CategoryRow/CategoryRow';
 import ModalCreateCategory from '../Modals/Categories/ModalCreateCategory/ModalCreateCategory';
-
-export type Category = {
-    id: number;
-    name: string;
-    description: string;
-}
+import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
+import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
+import classes from './CategoryList.module.css';
 
 function CategoryList({active, createActive, setCreateActive}:IList) {
     const [data, setData] = useState<Category[]>([]);

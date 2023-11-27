@@ -1,11 +1,7 @@
-import { Category } from "../../../CategoryList/CategoryList";
-import Modal, { IModalProps } from "../../Modal/Modal";
+import IDeleteCategory from "../../../../interfaces/IDeleteCategory";
+import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css";
 
-interface IDeleteCategory extends IModalProps {
-    category: Category;
-    deleteCategory: (id: number) => void
-}
 
 const ModalDeleteCategory = ({active, setActive, deleteCategory, category}:IDeleteCategory) => {
     function deleteClick() {

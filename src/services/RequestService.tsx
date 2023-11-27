@@ -1,6 +1,7 @@
-import { Category } from "../components/CategoryList/CategoryList";
-import { Task } from "../components/TaskList/TaskList";
-//d.ts 
+import Category from "../types/Category";
+import Task from "../types/Task";
+
+
 class RequestService {
 
     private readonly domain: string;

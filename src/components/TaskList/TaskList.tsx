@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Row from '../Row/Row';
-import classes from './TaskList.module.css';
-import ModalEdit from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
-import ModalEditTask from '../Modals/Tasks/ModalEditTask/ModalEditTask';
-import Modal from '../Modals/Modal/Modal';
-import ModalDeleteTask from '../Modals/Tasks/ModalDeleteTask/ModalDeleteTask';
-import {RequestService} from "../../services/RequestService";
-import ModalCreateTask from '../Modals/Tasks/ModalCreateTask/ModalCreateTask';
+import { useState, useEffect } from "react";
+import IList from "../../interfaces/IList";
+import { RequestService } from "../../services/RequestService";
+import Task from "../../types/Task";
+import ModalCreateTask from "../Modals/Tasks/ModalCreateTask/ModalCreateTask";
+import ModalDeleteTask from "../Modals/Tasks/ModalDeleteTask/ModalDeleteTask";
+import ModalEditTask from "../Modals/Tasks/ModalEditTask/ModalEditTask";
+import Row from "../Row/Row";
 
-
-
-export type Task = {
-    id: number;
-    name: string;
-    description: string;
-    categoryId: number;
-}
-
-export interface IList{
-    active: boolean;
-    createActive: boolean;
-    setCreateActive: (value: boolean) => void;
-}
+import classes from "./TaskList.module.css";
 
 function TaskList({active, createActive, setCreateActive}: IList) {
     const [data, setData] = useState<Task[]>([]);

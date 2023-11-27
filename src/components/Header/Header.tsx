@@ -1,22 +1,7 @@
-import React, { useState } from "react";
-import Modal from "../Modals/Modal/Modal";
-import ModalDeleteTask from "../Modals/Tasks/ModalDeleteTask/ModalDeleteTask";
-import ModalDeleteCategory from "../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory";
-import ModalCreateTask from "../Modals/Tasks/ModalCreateTask/ModalCreateTask";
+import IActive from "../../interfaces/IActive";
 import classes from "./Header.module.css";
 
-//Работает
-interface IActive {
-    createLinkText: string;
-    setModalActive: (value: boolean) => void;
-    setTasksActive: (value: boolean) => void;
-    setCategoriesActive: (value: boolean) => void;
-}
-
 function Header({createLinkText, setModalActive, setTasksActive, setCategoriesActive }: IActive) {
-    const [taskCreateActive, setTaskCreateActive] = useState<boolean>(true);
-    const [categoryCreateActive, setCategoryCreateActive] = useState<boolean>(false);
-
     function enableTasks(){
         setCategoriesActive(false);
         setTasksActive(true);
