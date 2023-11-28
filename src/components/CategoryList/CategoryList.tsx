@@ -8,7 +8,7 @@ import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalD
 import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
 import classes from './CategoryList.module.css';
 
-function CategoryList({active, createActive, setCreateActive}:IList) {
+function CategoryList({createActive, setCreateActive}:IList) {
     const [data, setData] = useState<Category[]>([]);
     const [currentData, setCurrentData] = useState<Category>({ id: 0, name: "", description: ""});
 
@@ -71,7 +71,7 @@ function CategoryList({active, createActive, setCreateActive}:IList) {
             onClickEdit={onEdit}
             onClickDelete={onDelete} />
     ));
-    return active ? (
+    return (
         <div className={classes.main}>
             <div className={classes.tasklist}>
                 {listItems}
@@ -80,7 +80,7 @@ function CategoryList({active, createActive, setCreateActive}:IList) {
             <ModalEditCategory active={editModalActive} setActive={setEditActive} category={currentData} updatePage={onEditUpdate} />
             <ModalDeleteCategory active={deleteModalActive} setActive={setDeleteModalActive} category={currentData} deleteCategory={onDeleteUpdate} />
         </div>
-    ): null;
+    );
 }
 
 export default CategoryList;

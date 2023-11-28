@@ -82,7 +82,7 @@ button {
 
 .children {
   height: 60%;
-  width: 100%;
+  width: 1920px;
   display: flex;
   flex-direction: column;
   justify-content: center;

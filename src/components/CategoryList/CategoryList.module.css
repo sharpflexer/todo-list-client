@@ -1,7 +1,8 @@
 
 .main{
     top: 10vw;
-    width: 100%;
+    width: 1897px;
+    max-width: 1897px;
     height: 100%;
     display: flex;
     justify-content: center;

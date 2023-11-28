@@ -9,7 +9,7 @@ import Row from "../Row/Row";
 
 import classes from "./TaskList.module.css";
 
-function TaskList({active, createActive, setCreateActive}: IList) {
+function TaskList({createActive, setCreateActive}: IList) {
     const [data, setData] = useState<Task[]>([]);
     const [currentData, setCurrentData] = useState<Task>({ id: 0, name: "", description: "", categoryId: 0 });
 
@@ -74,7 +74,7 @@ function TaskList({active, createActive, setCreateActive}: IList) {
             onClickEdit={onEdit}
             onClickDelete={onDelete} />
     ));
-    return active ? (
+    return (
         <div className={classes.main}>
             <div className={classes.tasklist}>
                 {listItems}
@@ -83,7 +83,7 @@ function TaskList({active, createActive, setCreateActive}: IList) {
             <ModalEditTask active={editActive} setActive={setEditActive} task={currentData} updatePage={onEditUpdate} />
             <ModalDeleteTask active={deleteActive} setActive={setDeleteActive} task={currentData} deletePage={onDeleteUpdate} />
         </div>
-    ): null;
+    );
 }
 
 export default TaskList;
