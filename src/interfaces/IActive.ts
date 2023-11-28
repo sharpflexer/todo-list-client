@@ -1,6 +1,6 @@
 interface IActive {
-    createLinkText: string;
-    setModalActive: (value: boolean) => void;
+    active: boolean;
+    setActive: (value: boolean) => void;
 }
 
 export default IActive;

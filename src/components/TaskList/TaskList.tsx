@@ -38,8 +38,8 @@ function TaskList({ createActive, setCreateActive }: IList) {
     const onCreateUpdate = (task: Task) => {
         setCreateActive(false);
 
-        RequestService.createTask(task).then(() => {
-            setData([task, ...data].reverse())
+        RequestService.createTask(task).then((response) => {
+            setData([response, ...data].reverse())
         });
     }
 
@@ -60,6 +60,7 @@ function TaskList({ createActive, setCreateActive }: IList) {
             setData(oldTasks)
         });
     }
+
     // fetch data
     const dataFetch = async () => {
         const data = items.length !== 0 ? items: await RequestService.readTasks();
@@ -85,9 +86,9 @@ function TaskList({ createActive, setCreateActive }: IList) {
             <div className={classes.tasklist}>
                 {listItems}
             </div>
-            <ModalCreateTask active={createActive} setActive={setCreateActive} updatePage={onCreateUpdate} />
-            <ModalEditTask active={editActive} setActive={setEditActive} task={currentData} updatePage={onEditUpdate} />
-            <ModalDeleteTask active={deleteActive} setActive={setDeleteActive} task={currentData} deletePage={onDeleteUpdate} />
+            <ModalCreateTask active={createActive} setActive={setCreateActive} loadItem={onCreateUpdate} />
+            <ModalEditTask active={editActive} setActive={setEditActive} item={currentData} loadItem={onEditUpdate} />
+            <ModalDeleteTask active={deleteActive} setActive={setDeleteActive} loadItem={onDeleteUpdate} item={currentData}/>
         </div>
     );
 }

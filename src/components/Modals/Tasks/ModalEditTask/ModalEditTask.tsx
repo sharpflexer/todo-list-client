@@ -1,23 +1,25 @@
 import { useEffect } from "react";
 import useFieldsState from "../../../../hooks/useFieldsState";
-import IModalEditProps from "../../../../interfaces/IModalEditProps";
 import Field from "../../../Field/Field";
 import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css";
+import IModalContent from "../../../../interfaces/IModalContent";
+import IHasItem from "../../../../interfaces/IHasItem";
+import Task from "../../../../types/Task";
 
-const ModalEditTask = ({ task, updatePage, active, setActive }: IModalEditProps) => {
+const ModalEditTask = ({ active, setActive, loadItem, item}: IModalContent<Task> & IHasItem<Task>) => {
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();
 
     useEffect(() => {
-        setName(task.name);
-        setCategory(task.categoryId + '');
-        setDescription(task.description);
-    }, [task, setName, setCategory, setDescription]);
+        setName(item.name);
+        setCategory(item.categoryId + '');
+        setDescription(item.description);
+    }, [item, setName, setCategory, setDescription]);
 
 
     function updateClick() {
-        updatePage({
-            id: task.id,
+        loadItem({
+            id: item.id,
             name: name,
             description: description,
             categoryId: Number(category)

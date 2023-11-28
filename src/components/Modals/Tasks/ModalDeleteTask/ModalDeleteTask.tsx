@@ -1,11 +1,13 @@
-import IModalDeleteProps from "../../../../interfaces/IModalDeleteProps";
+import IHasItem from "../../../../interfaces/IHasItem";
+import IModalContent from "../../../../interfaces/IModalContent";
+import Task from "../../../../types/Task";
 import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css"
 
-const ModalDeleteTask = ({ active, setActive, task, deletePage }: IModalDeleteProps) => {
+const ModalDeleteTask = ({ active, setActive, loadItem, item}: IModalContent<number> & IHasItem<Task>) => {
 
     function deleteClick() {
-        deletePage(task.id);
+        loadItem(item.id);
         setActive(false);
     }
 
@@ -16,7 +18,7 @@ const ModalDeleteTask = ({ active, setActive, task, deletePage }: IModalDeletePr
             active={active}
             setActive={setActive}
             submitClick={deleteClick}>
-            <label className={fields.deleteMessage}>Вы уверены, что хотите удалить задачу {task.name}?</label>
+            <label className={fields.deleteMessage}>Вы уверены, что хотите удалить задачу {item.name}?</label>
         </Modal>
     );
 }

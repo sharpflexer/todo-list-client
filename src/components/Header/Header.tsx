@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import IActive from "../../interfaces/IActive";
+import IHeader from "../../interfaces/IHeader";
 import classes from "./Header.module.css";
 
-function Header({ createLinkText, setModalActive }: IActive) {
-    //TODO: Обернуть tasklist в context
+function Header({ createLinkText, setModalActive }: IHeader) {
+
     return (
         <div className={classes.layout}>
             <label className={classes.todo}>ToDo List</label>

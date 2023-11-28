@@ -83,9 +83,9 @@ function CategoryList({createActive, setCreateActive}:IList) {
             <div className={classes.tasklist}>
                 {listItems}
             </div>
-            <ModalCreateCategory active={createActive} setActive={setCreateActive} updatePage={onCreateUpdate}/>
-            <ModalEditCategory active={editModalActive} setActive={setEditActive} category={currentData} updatePage={onEditUpdate} />
-            <ModalDeleteCategory active={deleteModalActive} setActive={setDeleteModalActive} category={currentData} deleteCategory={onDeleteUpdate} />
+            <ModalCreateCategory active={createActive} setActive={setCreateActive} loadItem={onCreateUpdate}/>
+            <ModalEditCategory active={editModalActive} setActive={setEditActive} item={currentData} loadItem={onEditUpdate} />
+            <ModalDeleteCategory active={deleteModalActive} setActive={setDeleteModalActive} item={currentData} loadItem={onDeleteUpdate} />
         </div>
     );
 }

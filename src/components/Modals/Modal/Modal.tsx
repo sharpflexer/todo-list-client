@@ -1,8 +1,9 @@
-import IModalProps from "../../../interfaces/IModalProps";
+
+import IModal from "../../../interfaces/IModal";
 import classes from "./Modal.module.css";
 import ReactDOM from 'react-dom';
 
-const Modal = ({ title, submitName, cancelName, active, setActive, submitClick, children }: IModalProps) => {
+const Modal = ({ title, submitName, cancelName, active, setActive, submitClick, children }: IModal) => {
     function closeModal() {
         setActive(false);
     }
@@ -21,7 +22,7 @@ const Modal = ({ title, submitName, cancelName, active, setActive, submitClick, 
                 </div>
                 <div className={classes.buttonPanel}>
                     <button className={classes.submit}
-                        onClick={submitClick ? submitClick : () => { }}>{submitName}</button>
+                        onClick={submitClick}>{submitName}</button>
                     <button className={classes.cancel}
                         onClick={closeModal} >{cancelName}</button>
                 </div>

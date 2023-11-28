@@ -1,13 +1,13 @@
 import { useState } from "react";
-import ICategoryCreateProps from "../../../../interfaces/ICategoryCreateProps";
 import { RequestService } from "../../../../services/RequestService";
 import Category from "../../../../types/Category";
 import Field from "../../../Field/Field";
 import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css";
+import IModalContent from "../../../../interfaces/IModalContent";
 
 
-function ModalCreateCategory({active, setActive, updatePage} : ICategoryCreateProps) {
+function ModalCreateCategory({active, setActive, loadItem} : IModalContent<Category>) {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
@@ -17,8 +17,7 @@ function ModalCreateCategory({active, setActive, updatePage} : ICategoryCreatePr
             name, 
             description
         }
-        RequestService.createCategory(category);
-        updatePage(category);
+        RequestService.createCategory(category).then(item => loadItem(item));;
     }
 
     return (

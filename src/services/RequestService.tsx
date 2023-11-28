@@ -24,8 +24,8 @@ class RequestService {
     }
 
 
-    public async createCategory(category: Category) {
-        await this.request('api/ToDoList/AddCategory', 'POST', category);
+    public async createCategory(category: Category) : Promise<Category> {
+        return (await this.request('api/ToDoList/AddCategory', 'POST', category)).json();
     }
     public async readCategories() {
         return (await this.request('api/ToDoList/GetCategories', 'GET')).json();
@@ -37,8 +37,8 @@ class RequestService {
         await this.request('api/ToDoList/RemoveCategory/' + id, 'GET');
     }
 
-    public async createTask(task: Task) {
-        await this.request('api/ToDoList/AddTask', 'POST', task);
+    public async createTask(task: Task) : Promise<Task> {
+      return  (await this.request('api/ToDoList/AddTask', 'POST', task)).json();
     }
     public async readTasks() {
         return (await this.request('api/ToDoList/GetTasks', 'GET')).json();

@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
-import IEditCategory from "../../../../interfaces/IEditCategory";
 import Field from "../../../Field/Field";
 import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css";
+import IModalContent from "../../../../interfaces/IModalContent";
+import Category from "../../../../types/Category";
+import IHasItem from "../../../../interfaces/IHasItem";
 
 
 
-const ModalEditCategory = ({ active, setActive, category, updatePage}: IEditCategory) => {
+const ModalEditCategory = ({ active, setActive, loadItem, item}: IModalContent<Category> & IHasItem<Category>) => {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
     useEffect(() => {
-        setName(category.name);
-        setDescription(category.description);
-    }, [category, setName, setDescription]);
+        setName(item.name);
+        setDescription(item.description);
+    }, [item, setName, setDescription]);
 
     function updateClick() {
-        updatePage({id:category.id, name, description})
+        loadItem({id:item.id, name, description})
         setActive(false);
     }
 

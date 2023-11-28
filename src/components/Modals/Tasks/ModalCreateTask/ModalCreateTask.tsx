@@ -1,11 +1,11 @@
 import useFieldsState from "../../../../hooks/useFieldsState";
-import IModalCreateProps from "../../../../interfaces/IModalCreateProps";
+import IModalW from "../../../../interfaces/IModalContent";
 import Task from "../../../../types/Task";
 import Field from "../../../Field/Field";
 import Modal from "../../Modal/Modal";
 import fields from "../../fields.module.css";
 
-const ModalCreateTask = ({ active, setActive, updatePage }: IModalCreateProps) => {
+const ModalCreateTask = ({ active, setActive, loadItem }: IModalW<Task>) => {
     const { name, category, description, setName, setCategory, setDescription } = useFieldsState();
 
     function createClick() {
@@ -15,7 +15,7 @@ const ModalCreateTask = ({ active, setActive, updatePage }: IModalCreateProps) =
             description,
             categoryId: Number(category)
         }
-        updatePage(task);
+        loadItem(task);
     }
     return (
         <Modal title="Создание задачи"

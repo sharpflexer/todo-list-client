@@ -4,4 +4,4 @@ type Category = {
     description: string;
 };
 
-export default Category;
+export default Category; 
