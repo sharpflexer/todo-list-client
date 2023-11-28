@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import IList from "../../interfaces/IList";
 import { RequestService } from "../../services/RequestService";
 import Task from "../../types/Task";
@@ -8,13 +8,17 @@ import ModalEditTask from "../Modals/Tasks/ModalEditTask/ModalEditTask";
 import Row from "../Row/Row";
 
 import classes from "./TaskList.module.css";
+import React from "react";
 
-function TaskList({createActive, setCreateActive}: IList) {
+function TaskList({ createActive, setCreateActive }: IList) {
     const [data, setData] = useState<Task[]>([]);
     const [currentData, setCurrentData] = useState<Task>({ id: 0, name: "", description: "", categoryId: 0 });
 
     const [editActive, setEditActive] = useState<boolean>(false);
     const [deleteActive, setDeleteActive] = useState<boolean>(false);
+
+    const TaskContext = React.createContext([]);
+    const items = useContext(TaskContext);
 
     const onEdit = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
@@ -41,7 +45,7 @@ function TaskList({createActive, setCreateActive}: IList) {
 
     const onEditUpdate = (task: Task) => {
         setEditActive(false);
-        
+
         RequestService.updateTask(task).then(() => {
             const oldTasks = data.filter((d) => d.id !== task.id);
             setData([task, ...oldTasks])
@@ -58,7 +62,8 @@ function TaskList({createActive, setCreateActive}: IList) {
     }
     // fetch data
     const dataFetch = async () => {
-        const data = await RequestService.readTasks();
+        const data = items.length !== 0 ? items: await RequestService.readTasks();
+        <TaskContext.Provider value={data} />
         setData(data);
     };
 
@@ -74,12 +79,13 @@ function TaskList({createActive, setCreateActive}: IList) {
             onClickEdit={onEdit}
             onClickDelete={onDelete} />
     ));
+
     return (
         <div className={classes.main}>
             <div className={classes.tasklist}>
                 {listItems}
             </div>
-            <ModalCreateTask active={createActive} setActive={setCreateActive} updatePage = {onCreateUpdate}/>
+            <ModalCreateTask active={createActive} setActive={setCreateActive} updatePage={onCreateUpdate} />
             <ModalEditTask active={editActive} setActive={setEditActive} task={currentData} updatePage={onEditUpdate} />
             <ModalDeleteTask active={deleteActive} setActive={setDeleteActive} task={currentData} deletePage={onDeleteUpdate} />
         </div>

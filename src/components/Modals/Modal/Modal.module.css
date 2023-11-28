@@ -33,7 +33,7 @@
 
 button {
   font-family: Roboto, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+    'Liberation Sans', sans-serif;
   font-size: 20;
   margin-right: 12px;
 }
@@ -82,7 +82,7 @@ button {
 
 .children {
   height: 60%;
-  width: 1920px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -18,10 +18,10 @@ const Field: React.FC<IFieldProps> = ({ className, title, hint, value, setValue 
 
     return (
 
-        <div className={className + " " + classes.field}>
-            <label className={classes.title}>{title}</label>
+        <fieldset className={className + " " + classes.field}>
+            <legend className={classes.title}>{title}</legend>
             <input className={classes.input} placeholder={hint} value={value} onChange={handleNameChange} />
-        </div>
+        </fieldset>
 
     );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import IList from '../../interfaces/IList';
 import { RequestService } from '../../services/RequestService';
 import Category from '../../types/Category';
@@ -7,6 +7,7 @@ import ModalCreateCategory from '../Modals/Categories/ModalCreateCategory/ModalC
 import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalDeleteCategory';
 import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
 import classes from './CategoryList.module.css';
+import React from 'react';
 
 function CategoryList({createActive, setCreateActive}:IList) {
     const [data, setData] = useState<Category[]>([]);
@@ -15,12 +16,17 @@ function CategoryList({createActive, setCreateActive}:IList) {
     const [editModalActive, setEditActive] = useState<boolean>(false);
     const [deleteModalActive, setDeleteModalActive] = useState<boolean>(false);
 
+    const CategoryContext = React.createContext([]);
+    const items = useContext(CategoryContext);
+
+
     const onEdit = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
         setCurrentData(currentTask[0]);
 
         setEditActive(true);
     }
+
 
     const onDelete = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
@@ -56,7 +62,8 @@ function CategoryList({createActive, setCreateActive}:IList) {
     }
     // fetch data
     const dataFetch = async () => {
-        const data = await RequestService.readCategories();
+        const data = items.length !== 0 ? items : await RequestService.readCategories();
+        <CategoryContext.Provider value={data}/>
         setData(data);
     };
 
