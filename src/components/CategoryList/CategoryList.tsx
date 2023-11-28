@@ -38,8 +38,8 @@ function CategoryList({createActive, setCreateActive}:IList) {
     const onCreateUpdate = (category: Category) => {
         setCreateActive(false);
 
-        RequestService.createCategory(category).then(() => {
-            setData([category, ...data].reverse());
+        RequestService.createCategory(category).then((response) => {
+            setData([response, ...data].reverse());
         });
     }
 

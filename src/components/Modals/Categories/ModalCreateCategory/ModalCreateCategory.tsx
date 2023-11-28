@@ -17,7 +17,7 @@ function ModalCreateCategory({active, setActive, loadItem} : IModalContent<Categ
             name, 
             description
         }
-        RequestService.createCategory(category).then(item => loadItem(item));;
+        loadItem(category);;
     }
 
     return (
