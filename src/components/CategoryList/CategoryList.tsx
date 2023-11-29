@@ -8,6 +8,7 @@ import ModalDeleteCategory from '../Modals/Categories/ModalDeleteCategory/ModalD
 import ModalEditCategory from '../Modals/Categories/ModalEditCategory/ModalEditCategory';
 import classes from './CategoryList.module.css';
 import React from 'react';
+import ListContext from '../../context/ListContext';
 
 function CategoryList({createActive, setCreateActive}:IList) {
     const [data, setData] = useState<Category[]>([]);
@@ -16,8 +17,7 @@ function CategoryList({createActive, setCreateActive}:IList) {
     const [editModalActive, setEditActive] = useState<boolean>(false);
     const [deleteModalActive, setDeleteModalActive] = useState<boolean>(false);
 
-    const CategoryContext = React.createContext([]);
-    const items = useContext(CategoryContext);
+    const {categories} = useContext(ListContext);
 
 
     const onEdit = (id: number) => {
@@ -62,8 +62,8 @@ function CategoryList({createActive, setCreateActive}:IList) {
     }
     // fetch data
     const dataFetch = async () => {
-        const data = items.length !== 0 ? items : await RequestService.readCategories();
-        <CategoryContext.Provider value={data}/>
+        const data = categories.length !== 0 ? categories : await RequestService.readCategories();
+        <ListContext.Provider value={data}/>
         setData(data);
     };
 

@@ -8,7 +8,7 @@ import ModalEditTask from "../Modals/Tasks/ModalEditTask/ModalEditTask";
 import Row from "../Row/Row";
 
 import classes from "./TaskList.module.css";
-import React from "react";
+import ListContext from "../../context/ListContext";
 
 function TaskList({ createActive, setCreateActive }: IList) {
     const [data, setData] = useState<Task[]>([]);
@@ -17,8 +17,7 @@ function TaskList({ createActive, setCreateActive }: IList) {
     const [editActive, setEditActive] = useState<boolean>(false);
     const [deleteActive, setDeleteActive] = useState<boolean>(false);
 
-    const TaskContext = React.createContext([]);
-    const items = useContext(TaskContext);
+    const {tasks} = useContext(ListContext);
 
     const onEdit = (id: number) => {
         const currentTask = data.filter((d) => d.id === id);
@@ -63,8 +62,8 @@ function TaskList({ createActive, setCreateActive }: IList) {
 
     // fetch data
     const dataFetch = async () => {
-        const data = items.length !== 0 ? items: await RequestService.readTasks();
-        <TaskContext.Provider value={data} />
+        const data = tasks.length !== 0 ? tasks: await RequestService.readTasks();
+        <ListContext.Provider value={data} />
         setData(data);
     };
 
